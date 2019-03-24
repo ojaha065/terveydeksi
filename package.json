@@ -1,11 +1,11 @@
 {
   "name": "terveydeksi",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "version": "1.0.0",
+  "author": "Jani Haiko & Jere Länsipii",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ionic serve --devapp",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
