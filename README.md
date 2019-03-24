@@ -22,7 +22,10 @@ Pääsääntöisesti on hyvä tehdä mahdollisimman pieni muutos kerrallaan ja c
 
 ## Kehitysympäristön käynnistys
 Ensin tarvittaessa `npm install`  
-`npm start` tai `ionic serve --devapp`
+sitten `npm start` tai `ionic serve --devapp`
+
+## Backend
+Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS REST-apia, joka löytyy osoitteesta https://terveydeksi.azurewebsites.net/. APIn käyttöohjeet löytyvät sen omasta [reposta](https://github.com/ojaha065/terveydeksiBackend).
 
 ## Muutama lisähuomio
 * Käytetään GitHubin issueita hyväksi. Issuen voi _assign_ tietylle henkilölle, jolloin pysytään kartalla, että kenen vastuulla on
