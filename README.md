@@ -21,6 +21,7 @@ Pääsääntöisesti on hyvä tehdä mahdollisimman pieni muutos kerrallaan ja c
 `npm start` onnistuu ja sovelluksen etusivu avautuu.)
 
 ## Kehitysympäristön käynnistys
+Ensin tarvittaessa `npm install`  
 `npm start` tai `ionic serve --devapp`
 
 ## Muutama lisähuomio

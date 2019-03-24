@@ -2,7 +2,6 @@
   "name": "terveydeksi",
   "version": "1.0.0",
   "author": "Jani Haiko & Jere Länsipii",
-  "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
     "start": "ionic serve --devapp",
