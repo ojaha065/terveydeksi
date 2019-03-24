@@ -11,7 +11,7 @@ Kannattaa käyttää samoja tai uudempia versioita, niin välttyy monilta ongelm
 
 ## Janin pikaopas GIT:in käyttämiseen
 * Kloonaa repo omalle koneelle komennolla `git clone`
-* Aina ennen muutosten tekemistä **lataa uusimmat muutokset** komennolla `git pull`
+* Aina ennen muutosten tekemistä **lataa uusimmat muutokset** komennolla `git pull github master`
 * Kun olet tehnyt muutoksia, committaa ne paikallisesti komennoilla `git add .` ja `git commit -am "viesti"`
   * Commit-viestiksi on hyvä kirjoittaa mitä muutoksia on tehnyt.
 * Työnnä muutokset GitHubiin komennolla `git push github master`
