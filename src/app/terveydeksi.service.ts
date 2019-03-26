@@ -26,6 +26,7 @@ export class TerveydeksiService {
   };
 
   constructor(private http: HttpClient){
+    console.info("Ladataan yrityksiä...");
     this.haeYritykset(); // Haetaan yritykset heti kun service ladataan
   };
 };
