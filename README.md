@@ -15,6 +15,7 @@ Kannattaa käyttää samoja tai uudempia versioita, niin välttyy monilta ongelm
 * Kun olet tehnyt muutoksia, committaa ne paikallisesti komennoilla `git add .` ja `git commit -am "viesti"`
   * Commit-viestiksi on hyvä kirjoittaa mitä muutoksia on tehnyt.
 * Työnnä muutokset GitHubiin komennolla `git push github master`
+ * Ennen työntämistä kannattaa tehdä vielä uusi `git pull`, varsinkin, jos edellisestä on kulunut aikaa.
 
 Pääsääntöisesti on hyvä tehdä mahdollisimman pieni muutos kerrallaan ja committaa ja pushata välissä. Hyvä sääntö on myös se, että
 **vain toimivaa koodia pushataan**. Eli GitHubista voi aina ladata toimivan version. (Toimiva tarkoittaa tässä yhteydessä, että
@@ -34,4 +35,4 @@ mitäkin.
 * Tämä repo on tarkoitus muuttaa julkiseksi kurssin jälkeen, joten se kannattaa ottaa huomioon.
 * 🐺 Awoo!
 
-Tämä tiedosto päivitetty viimeksi 24.3.2019
+Tämä tiedosto päivitetty viimeksi 27.3.2019
