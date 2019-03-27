@@ -6,6 +6,14 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  Tässä on lista-/karttanäkymä.
+<ion-content>
+  <div id="gMapsPlaceholder">
+      Tähän tulee Google Maps
+  </div>
+  <ion-list>
+    <ion-list-header>Sopiva otsikko</ion-list-header>
+    <ion-item *ngFor="let yritys of terveydeksi.yritykset">
+      {{ yritys.nimi }}
+    </ion-item>
+  </ion-list>
 </ion-content>
