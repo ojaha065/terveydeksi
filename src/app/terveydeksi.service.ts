@@ -17,7 +17,7 @@ export class TerveydeksiService {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
       this.yritykset = data;
-      console.log(this.yritykset);
+      //console.log(this.yritykset);
     },(error: any) => {
       // Virhe
       console.error(error);

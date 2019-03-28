@@ -12,7 +12,7 @@
   </div>
   <ion-list>
     <ion-list-header>Sopiva otsikko</ion-list-header>
-    <ion-item *ngFor="let yritys of terveydeksi.yritykset">
+    <ion-item *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       {{ yritys.nimi }}
     </ion-item>
   </ion-list>
