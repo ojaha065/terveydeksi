@@ -6,6 +6,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  Tämä on oma tili -sivu.
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Et ole kirjautunut sisään</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-input type="text" placeholder="Käyttäjänimi" minlength="3" maxlength="32" clearInput required></ion-input>
+      <ion-input type="password" placeholder="Salasana" minlength="8" maxlength="256" clearInput required></ion-input>
+      <ion-button size="large" expand="block">Kirjaudu</ion-button>
+      <ion-text>Ei tunnuksia? <a>Rekisteröidy täällä</a></ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
