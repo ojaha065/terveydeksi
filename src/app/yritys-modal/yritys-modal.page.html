@@ -27,6 +27,9 @@
         <ion-item *ngIf="yritys.puhelinnumero">
           <ion-label>Puhelinnumero</ion-label>
           {{ yritys.puhelinnumero }}
+          <ion-button color="success">
+            <ion-icon name="call"></ion-icon>
+          </ion-button>
         </ion-item>
         <ion-item *ngIf="yritys.email">
           <ion-label>Sähköpostisoite</ion-label>

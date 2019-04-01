@@ -1,3 +1,5 @@
+<!--"Detail" asettaa nuolen jokaisen yrityksen kohdalle osoituksena siitä, 
+  että tämän elementin voi avata. Tämä on vissiin automaattinen iOS:ssa-->
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -11,9 +13,16 @@
       Tähän tulee Google Maps
   </div>
   <ion-list>
-    <ion-list-header>Sopiva otsikko</ion-list-header>
-    <ion-item *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
-      {{ yritys.nimi }}
+    <ion-list-header>Yritykset</ion-list-header>
+    <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
+      <ion-label text-wrap>
+        <ion-text color="primary">
+          <h2>{{ yritys.nimi }}</h2>
+        </ion-text>
+        <ion-text color="secondary">
+          <p>1,2 km päässä</p>
+        </ion-text>
+      </ion-label>
     </ion-item>
   </ion-list>
 </ion-content>
