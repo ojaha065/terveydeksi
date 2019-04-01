@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-yritys-modal',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./yritys-modal.page.scss']
 })
 export class YritysModalPage implements OnInit {
-  constructor(){};
+
+  suljeModal() {
+    this.modalController.dismiss();
+  }
+
+  constructor(private modalController: ModalController){};
 
   ngOnInit(){};
 };
