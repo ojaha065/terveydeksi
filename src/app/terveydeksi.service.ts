@@ -13,10 +13,14 @@ export class TerveydeksiService {
   // Kirjointin määrittelyn REST-apin repoon. T: Jani
   yritykset: object[];
 
+  loginToken: string;
+  username: string;
+
   haeYritykset = (): void => {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
       this.yritykset = data;
+      console.info("Yritykset ladattu!");
       //console.log(this.yritykset);
     },(error: any) => {
       // Virhe

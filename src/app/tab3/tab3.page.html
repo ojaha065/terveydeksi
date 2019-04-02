@@ -7,15 +7,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- Näytetään tämä card, jos käyttäjä ei ole kirjautunut -->
+  <ion-card *ngIf="!terveydeksi.loginToken">
     <ion-card-header>
       <ion-card-title>Et ole kirjautunut sisään</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-input type="text" placeholder="Käyttäjänimi" minlength="3" maxlength="32" clearInput required></ion-input>
-      <ion-input type="password" placeholder="Salasana" minlength="8" maxlength="256" clearInput required></ion-input>
-      <ion-button size="large" expand="block">Kirjaudu</ion-button>
+      <ion-text color="danger">{{ virheteksti }}</ion-text>
+      <ion-input [(ngModel)]="username" type="text" placeholder="Käyttäjänimi" minlength="3" maxlength="32" clearInput required></ion-input>
+      <ion-input [(ngModel)]="password" type="password" placeholder="Salasana" minlength="8" maxlength="256" clearInput required></ion-input>
+      <ion-button (click)="kirjaudu();" size="large" expand="block">Kirjaudu</ion-button>
       <ion-text>Ei tunnuksia? <a>Rekisteröidy täällä</a></ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Näytetään tämä card, jos käyttäjä on kirjautunut -->
+  <ion-card *ngIf="terveydeksi.loginToken">
+    <ion-card-header>
+      <ion-card-title>Hei, {{ terveydeksi.username }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="kirjauduUlos();" color="danger">Kirjaudu ulos</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>
