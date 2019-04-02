@@ -1,5 +1,3 @@
-<!--"Detail" asettaa nuolen jokaisen yrityksen kohdalle osoituksena siitä, 
-  että tämän elementin voi avata. Tämä on vissiin automaattinen iOS:ssa-->
 <ion-header>
   <ion-toolbar>
     <ion-title>
@@ -14,6 +12,8 @@
   </div>
   <ion-list>
     <ion-list-header>Yritykset</ion-list-header>
+    <!-- "Detail" asettaa nuolen jokaisen yrityksen kohdalle osoituksena siitä, 
+    että tämän elementin voi avata. Tämä on vissiin automaattinen iOS:ssa -->
     <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
         <ion-text color="primary">
