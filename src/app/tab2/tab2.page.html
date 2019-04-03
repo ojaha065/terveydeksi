@@ -9,9 +9,14 @@
 <ion-content>
   <div id="gMapsPlaceholder">
       Tähän tulee Google Maps
+      <br />
+      {{ terveydeksi.paikannusvirheDebug }}
+      <br />
+      {{ terveydeksi.currentLat }}, {{ terveydeksi.currentLon }}
   </div>
   <ion-list>
     <ion-list-header>Yritykset</ion-list-header>
+    <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe" class="ion-margin-start">{{ terveydeksi.paikannusvirhe }}</ion-text>
     <!-- "Detail" asettaa nuolen jokaisen yrityksen kohdalle osoituksena siitä, 
     että tämän elementin voi avata. Tämä on vissiin automaattinen iOS:ssa -->
     <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
