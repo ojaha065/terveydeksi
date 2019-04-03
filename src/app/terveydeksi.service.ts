@@ -85,17 +85,17 @@ export class TerveydeksiService {
     if(this.currentLat && this.currentLon){
       // Lasketaan jokaiselle yritykselle etäisyys nykyisestä sijainnista
       // https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
-      this.yritykset.forEach((yritys) => {
-        let deltaLat = (yritys.lat - this.currentLat) * Math.PI / 180;
-        let deltaLon = (yritys.lon - this.currentLon) * Math.PI / 180;
+      this.yritykset.forEach((yritys): void => {
+        let deltaLat: number = (yritys.lat - this.currentLat) * Math.PI / 180;
+        let deltaLon: number = (yritys.lon - this.currentLon) * Math.PI / 180;
 
-        let currentLatRadians = this.currentLat * Math.PI / 180;
-        let yritysLatRadians = yritys.lat * Math.PI / 180;
+        let currentLatRadians: number = this.currentLat * Math.PI / 180;
+        let yritysLatRadians: number = yritys.lat * Math.PI / 180;
 
         // Matka pallon pinnalla
-        // Kyllä lukion matematiikaan opettaja olisi nyt ylpeä... :D
-        let a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2) * Math.cos(currentLatRadians) * Math.cos(yritysLatRadians);
-        let c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1 - a));
+        // Kyllä lukion matematiikan opettaja olisi nyt ylpeä... :D
+        let a: number = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2) * Math.cos(currentLatRadians) * Math.cos(yritysLatRadians);
+        let c: number = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1 - a));
 
         // Tallennetaan tulos
         yritys.distance = c * 6371; // 6371 km on maapallon säde (r)

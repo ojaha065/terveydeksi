@@ -22,8 +22,8 @@ Pääsääntöisesti on hyvä tehdä mahdollisimman pieni muutos kerrallaan ja c
 `npm start` onnistuu ja sovelluksen etusivu avautuu.)
 
 ## Kehitysympäristön käynnistys
-Ensin tarvittaessa `npm install`  
-sitten `npm start` tai `ionic serve --devapp`
+Ensin tarvittaessa (jos uusia paketteja) `npm install`  
+sitten `npm start` tai `ionic serve --devapp` (Itse olen huomannut, että npm start -komentoa käytettäissä komentorivi-ikkuna jää välillä jumiin palvelimen sammuttamisen yhteydessä.)
 
 ## Backend
 Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS REST-apia, joka löytyy osoitteesta https://terveydeksi.azurewebsites.net/. APIn käyttöohjeet löytyvät sen omasta [reposta](https://github.com/ojaha065/terveydeksiBackend).
