@@ -25,7 +25,7 @@
           <h2>{{ yritys.nimi }}</h2>
         </ion-text>
         <ion-text color="secondary">
-          <p>1,2 km päässä</p>
+          <p *ngIf="yritys.distance">{{ yritys.distance.toFixed(2) }} km päässä</p>
         </ion-text>
       </ion-label>
     </ion-item>

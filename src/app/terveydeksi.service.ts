@@ -19,10 +19,10 @@ export class TerveydeksiService {
   };
 
   // TODO: yritykset-ominaisuudelle voisi määrittää oman tietotyypin.
-  // Eli sen tietotyyppi olisikin yritys[] eikä object[].
+  // Eli sen tietotyyppi olisikin yritys[] eikä any[].
   // Uusi tietotyyppi pitää luoda sen perusteella mitä REST-api palauttaa.
   // Kirjointin määrittelyn REST-apin repoon. T: Jani
-  yritykset: object[];
+  yritykset: any[];
 
   loginToken: string;
   username: string;
@@ -48,13 +48,13 @@ export class TerveydeksiService {
   };
   // Paikannetaan käyttäjä ja tallenna nykyinen sijainti
   paikanna = (): void => {
-    this.geolocation.getCurrentPosition(this.geolocationOptions).then((result: Geoposition) => {
+    this.geolocation.getCurrentPosition(this.geolocationOptions).then((result: Geoposition): void => {
       // OK
       this.paikannusvirheDebug = null;
       this.currentLat = result.coords.latitude;
       this.currentLon = result.coords.longitude;
 
-    }).catch((error: PositionError) => {
+    }).catch((error: PositionError): void => {
       // Virhe
       this.paikannusvirheDebug = error.message;
       switch(error.code){
@@ -81,7 +81,34 @@ export class TerveydeksiService {
     });
   };
   lajitteleLista = (): void => {
-    // Tässä pitäisi lajitella lista
+    // Lajitellaan vain, jos meillä on paikannustieto
+    if(this.currentLat && this.currentLon){
+      // Lasketaan jokaiselle yritykselle etäisyys nykyisestä sijainnista
+      // https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
+      this.yritykset.forEach((yritys) => {
+        let deltaLat = (yritys.lat - this.currentLat) * Math.PI / 180;
+        let deltaLon = (yritys.lon - this.currentLon) * Math.PI / 180;
+
+        let currentLatRadians = this.currentLat * Math.PI / 180;
+        let yritysLatRadians = yritys.lat * Math.PI / 180;
+
+        // Matka pallon pinnalla
+        // Kyllä lukion matematiikaan opettaja olisi nyt ylpeä... :D
+        let a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2) * Math.cos(currentLatRadians) * Math.cos(yritysLatRadians);
+        let c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1 - a));
+
+        // Tallennetaan tulos
+        yritys.distance = c * 6371; // 6371 km on maapallon säde (r)
+      });
+
+      // Sortataan lista
+      this.yritykset.sort((a: any, b:any): number => {
+        return a.distance - b.distance;
+      });
+    }
+    else{
+      setTimeout(this.lajitteleLista,1000); // Kokeillaan sekunin kuluttua uudelleen, jos paikannustieto silloin olisi
+    }
   };
 
   constructor(private http: HttpClient,private geolocation: Geolocation){
