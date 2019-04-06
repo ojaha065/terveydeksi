@@ -5,21 +5,26 @@
 </ion-header>
 
 <ion-content>
-  <!-- https://github.com/write2sv/ionic4-date-picker -->
-  <ionic-calendar-date-picker
-    (onSelect)="pvmValittu($event);"
-    [monthLabels]="['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu']"
-    [dayLabels]="['Su','Ma','Ti','Ke','To','Pe','La']"
-  >
-  </ionic-calendar-date-picker>
+  <div *ngIf="page1">
+    <!-- https://github.com/write2sv/ionic4-date-picker -->
+    <ionic-calendar-date-picker
+      (onSelect)="pvmValittu($event);"
+      [monthLabels]="['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu']"
+      [dayLabels]="['Su','Ma','Ti','Ke','To','Pe','La']"
+    >
+    </ionic-calendar-date-picker>
 
-  <ion-item>
-    <ion-label>Valitse kellonaika</ion-label>
-    <ion-datetime displayFormat="H:mm" cancelText="Peruuta" doneText="Ok" minuteValues="0,15,30,45"></ion-datetime>
-  </ion-item>
+    <ion-item *ngIf="varaus.pvm">
+      <ion-label>Valitse kellonaika</ion-label>
+      <ion-datetime [(ngModel)]="varaus.klo" displayFormat="H:mm" cancelText="Peruuta" doneText="Ok" minuteValues="0,15,30,45"></ion-datetime>
+    </ion-item>
+  </div>
 
+  <div *ngIf="!page1">
+    Tässä pitäisi näkyä asiakkaan tiedot.
+  </div>
 </ion-content>
 
-<ion-footer>
-  <ion-button expand="block" size="large">Hyväksy</ion-button>
+<ion-footer *ngIf="varaus.pvm && varaus.klo">
+  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large">Hyväksy</ion-button>
 </ion-footer>
