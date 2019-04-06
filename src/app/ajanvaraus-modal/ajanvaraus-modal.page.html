@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Varaa aika</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- https://github.com/write2sv/ionic4-date-picker -->
+  <ionic-calendar-date-picker
+    (onSelect)="pvmValittu($event);"
+    [monthLabels]="['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu']"
+    [dayLabels]="['Su','Ma','Ti','Ke','To','Pe','La']"
+  >
+  </ionic-calendar-date-picker>
+
+  <ion-item>
+    <ion-label>Valitse kellonaika</ion-label>
+    <ion-datetime displayFormat="H:mm" cancelText="Peruuta" doneText="Ok" minuteValues="0,15,30,45"></ion-datetime>
+  </ion-item>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" size="large">Hyväksy</ion-button>
+</ion-footer>

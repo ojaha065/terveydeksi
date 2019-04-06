@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button shape="round" expand="full" color="danger" (click)="suljeModal()">Sulje Ikkuna</ion-button>
+    <ion-button shape="round" expand="full" color="danger" (click)="suljeModal();">Sulje Ikkuna</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -12,6 +12,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-button>Näytä kartalla</ion-button>
+      <ion-button (click)="varaaAika();">Varaa aika</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
 
