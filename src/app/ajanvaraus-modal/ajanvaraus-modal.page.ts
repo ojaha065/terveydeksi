@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TerveydeksiService } from '../terveydeksi.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ajanvaraus-modal',
@@ -21,10 +23,18 @@ export class AjanvarausModalPage implements OnInit {
     this.varaus.pvm = valittuPvm;
   };
   varausSeuraavaNappi = (): void => {
+    this.http.get(`${this.terveydeksi.apiUrl}/omatTiedot?token=${this.terveydeksi.loginToken}`).subscribe((response: object) => {
+      // OK
+      this.varaus.asiakas = response;
+    },(error: any) => {
+      // Virhe
+      console.error(error);
+    });
+
     this.page1 = false;
   };
 
-  constructor(){};
+  constructor(private terveydeksi: TerveydeksiService,private http: HttpClient){};
 
   ngOnInit() {};
 };

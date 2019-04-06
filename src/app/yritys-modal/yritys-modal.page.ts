@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AjanvarausModalPage } from '../ajanvaraus-modal/ajanvaraus-modal.page';
+import { TerveydeksiService } from '../terveydeksi.service';
 
 @Component({
   selector: 'app-yritys-modal',
@@ -21,7 +22,7 @@ export class YritysModalPage implements OnInit {
   };
 
 
-  constructor(private modalController: ModalController){};
+  constructor(private modalController: ModalController,private terveydeksi: TerveydeksiService){};
 
   ngOnInit(){};
 };
