@@ -14,17 +14,18 @@
     >
     </ionic-calendar-date-picker>
 
-    <ion-item *ngIf="varaus.pvm">
+    <ion-item *ngIf="varaus.aikaleima">
       <ion-label>Valitse kellonaika</ion-label>
       <ion-datetime [(ngModel)]="varaus.klo" displayFormat="H:mm" cancelText="Peruuta" doneText="Ok" minuteValues="0,15,30,45"></ion-datetime>
     </ion-item>
   </div>
 
   <div *ngIf="!page1">
+    <!-- Tässä pitäisi näkyä varauksen tiedot -->
     {{ varaus | json }}
   </div>
 </ion-content>
 
-<ion-footer *ngIf="varaus.pvm && varaus.klo">
-  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large">Hyväksy</ion-button>
+<ion-footer *ngIf="varaus.aikaleima && varaus.klo">
+  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
 </ion-footer>

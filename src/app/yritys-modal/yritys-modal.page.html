@@ -12,7 +12,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-button>Näytä kartalla</ion-button>
-      <ion-button *ngIf="terveydeksi.loginToken" (click)="varaaAika();">Varaa aika</ion-button>
+      <ion-button *ngIf="terveydeksi.loginToken" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
 

@@ -27,6 +27,8 @@ export class TerveydeksiService {
   loginToken: string;
   username: string;
 
+  valitunYrityksenID: number;
+
   // Paikannustiedot
   currentLat: number;
   currentLon: number;

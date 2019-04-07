@@ -14,7 +14,8 @@ export class YritysModalPage implements OnInit {
     this.modalController.dismiss();
   };
 
-  varaaAika = async (): Promise<any> => {
+  varaaAika = async (id: number): Promise<any> => {
+    this.terveydeksi.valitunYrityksenID = id;
     const modal = await this.modalController.create({
       component: AjanvarausModalPage
     });
