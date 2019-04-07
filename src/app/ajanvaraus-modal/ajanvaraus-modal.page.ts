@@ -5,7 +5,7 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 @Component({
   selector: 'app-ajanvaraus-modal',
   templateUrl: './ajanvaraus-modal.page.html',
-  styleUrls: ['./ajanvaraus-modal.page.scss'],
+  styleUrls: ['./ajanvaraus-modal.page.scss']
 })
 export class AjanvarausModalPage implements OnInit {
   varaus: any = { // Oma tietotyyppi tähän
@@ -55,5 +55,5 @@ export class AjanvarausModalPage implements OnInit {
 
   constructor(private terveydeksi: TerveydeksiService,private http: HttpClient){};
 
-  ngOnInit() {};
+  ngOnInit(){};
 };
