@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-button shape="round" expand="full" color="danger" (click)="suljeModal();">Sulje Ikkuna</ion-button>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="suljeModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <h4>{{ yritys.nimi }}</h4>
   </ion-toolbar>
 </ion-header>
 
