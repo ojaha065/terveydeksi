@@ -7,13 +7,8 @@
 </ion-header>
 
 <ion-content>
-  <div id="gMapsPlaceholder">
-      Tähän tulee Google Maps
-      <br />
-      {{ terveydeksi.paikannusvirheDebug }}
-      <br />
-      {{ terveydeksi.currentLat }}, {{ terveydeksi.currentLon }}
-  </div>
+  <div id="openStreetMap"></div>
+  <ion-text *ngIf="terveydeksi.paikannusvirhe" color="danger">{{ terveydeksi.paikannusvirhe }}</ion-text>
   <ion-list>
     <ion-list-header>Yritykset</ion-list-header>
     <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe" class="ion-margin-start">{{ terveydeksi.paikannusvirhe }}</ion-text>

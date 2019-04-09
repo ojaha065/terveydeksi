@@ -27,6 +27,7 @@
     "cordova-plugin-geolocation": "4.0.1",
     "core-js": "^2.5.4",
     "ionic4-date-picker": "0.0.9",
+    "leaflet": "^1.4.0",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.29"
   },

@@ -66,7 +66,7 @@ export class TerveydeksiService {
           
           // Debug
             this.paikannusvirhe = null;
-            // Mikkelin koordinaatit
+            // Helsingin keskustan koordinaatit
             this.currentLat = 60.1733244;
             this.currentLon = 24.941024800000037;
 
