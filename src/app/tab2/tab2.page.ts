@@ -41,11 +41,20 @@ export class Tab2Page {
     if(this.terveydeksi.yritykset[0]){
       // Yritykset on jo ladattu
       this.terveydeksi.yritykset.forEach((yritys) => {
-        let thisMarker = marker([yritys.lat,yritys.lon]);
+        let thisMarker = marker([yritys.lat,yritys.lon],{
+          // Markerin asetukset
+          title: yritys.nimi,
+          alt: yritys.nimi,
+          riseOnHover: true
+        });
         // Korjataan puuttuvat ikonit
         thisMarker.options.icon.options.iconRetinaUrl = "./assets/leaflet/marker-icon-2x.png";
         thisMarker.options.icon.options.shadowUrl = "./assets/leaflet/marker-shadow.png";
+
         thisMarker.addTo(this.openStreetMap);
+        thisMarker.on("click",() => {
+          this.avaaYritysModal(yritys);
+        });
       });
     }
     else{
