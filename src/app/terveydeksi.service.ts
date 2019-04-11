@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -35,15 +36,32 @@ export class TerveydeksiService {
   paikannusvirhe: string;
   paikannusvirheDebug: string;
 
+  // Tietojen latausilmoitus
+  async lataus() {
+    const loading = await this.loadingCtrl.create({
+      spinner: "bubbles",
+      message: 'Ladataan...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    await loading.present();
+  };
+  suljeLataus() {
+    this.loadingCtrl.dismiss();
+  };
+
+  // Haetaan yritykset
   haeYritykset = (): void => {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
       this.yritykset = data;
       console.info("Yritykset ladattu!");
+      this.suljeLataus();
       this.lajitteleLista();
       //console.log(this.yritykset);
     },(error: any) => {
       // Virhe
+      this.suljeLataus();
       console.error(error);
       // TODO: Parempi virheenkäsittely
     });
@@ -58,6 +76,7 @@ export class TerveydeksiService {
 
     }).catch((error: PositionError): void => {
       // Virhe
+      this.suljeLataus();
       this.paikannusvirheDebug = error.message;
       switch(error.code){
         case 1:
@@ -113,8 +132,9 @@ export class TerveydeksiService {
     }
   };
 
-  constructor(private http: HttpClient,private geolocation: Geolocation){
+  constructor(private http: HttpClient,private geolocation: Geolocation,public loadingCtrl: LoadingController){
     console.info("Ladataan yrityksiä...");
+    this.lataus();
     this.haeYritykset(); // Haetaan yritykset heti kun service ladataan
     this.paikanna(); // Haetaan paikannustieto
   };
