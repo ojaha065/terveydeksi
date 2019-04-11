@@ -10,6 +10,7 @@ import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  // Haetaan elementti sivulta
   @ViewChild("openStreetMap") mapContainer: any;
 
   openStreetMap: Map;

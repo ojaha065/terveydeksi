@@ -30,6 +30,7 @@ export class YritysModalPage implements OnInit {
     ionViewDidEnter(){
       // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
       // https://leafletjs.com/reference-1.4.0.html
+      // TODO: keskitä kartta juuri tähän yritykseen
       this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
       tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
