@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="dark" (click)="suljeModal()">
+      <ion-button color="dark" (click)="suljeModal();">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -16,7 +16,7 @@
       <ion-card-subtitle>{{ yritys.tyyppi }}, {{ (yritys.distance) ? yritys.distance.toFixed(2) : "?" }} km päässä</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-button>Näytä kartalla</ion-button>
+      <div class="openStreetMap" #openStreetMap></div>
       <ion-button *ngIf="terveydeksi.loginToken" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
