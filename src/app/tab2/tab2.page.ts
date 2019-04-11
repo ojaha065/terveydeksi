@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { ModalController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
@@ -10,6 +10,9 @@ import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  // Haetaan elementti sivulta
+  @ViewChild("openStreetMap") mapContainer: any;
+
   openStreetMap: Map;
   lastGeolocationLat: number;
 
@@ -27,7 +30,7 @@ export class Tab2Page {
   ionViewDidEnter(){
     // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
     // https://leafletjs.com/reference-1.4.0.html
-    this.openStreetMap = new Map("openStreetMap").setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
+    this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
     this.lastGeolocationLat = this.terveydeksi.currentLat || 60.1733244;
     tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
@@ -41,11 +44,20 @@ export class Tab2Page {
     if(this.terveydeksi.yritykset[0]){
       // Yritykset on jo ladattu
       this.terveydeksi.yritykset.forEach((yritys) => {
-        let thisMarker = marker([yritys.lat,yritys.lon]);
+        let thisMarker = marker([yritys.lat,yritys.lon],{
+          // Markerin asetukset
+          title: yritys.nimi,
+          alt: yritys.nimi,
+          riseOnHover: true
+        });
         // Korjataan puuttuvat ikonit
         thisMarker.options.icon.options.iconRetinaUrl = "./assets/leaflet/marker-icon-2x.png";
         thisMarker.options.icon.options.shadowUrl = "./assets/leaflet/marker-shadow.png";
+
         thisMarker.addTo(this.openStreetMap);
+        thisMarker.on("click",() => {
+          this.avaaYritysModal(yritys);
+        });
       });
     }
     else{
