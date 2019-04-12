@@ -56,13 +56,17 @@ export class TerveydeksiService {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
       this.httpVirhe = null;
-      this.suljeLataus();
       this.yritykset = data;
+      setTimeout((): void => {
+        this.suljeLataus();
+      },1000);
       this.lajitteleLista();
       //console.log(this.yritykset);
     },(error: HttpErrorResponse) => {
       // Virhe
-      this.suljeLataus();
+      setTimeout((): void => {
+        this.suljeLataus();
+      },1000);
       console.error(error);
       this.httpVirhe = `Voi ei! Jokin meni pieleen yrittäessäni etsiä alueesi palveluntarjoajia. Yritäthän myöhemmin uudelleen? (Virhekoodi: ${error.status})`;
     });
