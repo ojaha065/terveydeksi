@@ -80,15 +80,9 @@ export class TerveydeksiService {
       this.paikannusvirheDebug = error.message;
       switch(error.code){
         case 1:
+          // EXPECTED ERROR
           // Tämä tapahtuu myös, jos virhe johtuu salatun yhteyden puutteesta (esim. DevApissa)
-          //this.paikannusvirhe = "Käyttö estetty. Paikannustiedot eivät ole käytettävissä."
-          
-          // Debug
-            this.paikannusvirhe = null;
-            // Helsingin keskustan koordinaatit
-            this.currentLat = 60.1733244;
-            this.currentLon = 24.941024800000037;
-
+          this.paikannusvirhe = "Käyttö estetty. Paikannustiedot eivät ole käytettävissä."
           break;
         case 2:
           this.paikannusvirhe = "Paikannustiedot eivät ole käytettävissä.";
