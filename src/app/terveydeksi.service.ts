@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
 import { LoadingController } from '@ionic/angular';
 
@@ -24,6 +24,7 @@ export class TerveydeksiService {
   // Uusi tietotyyppi pitää luoda sen perusteella mitä REST-api palauttaa.
   // Kirjointin määrittelyn REST-apin repoon. T: Jani
   yritykset: any[];
+  httpVirhe: string;
 
   loginToken: string;
   username: string;
@@ -54,15 +55,16 @@ export class TerveydeksiService {
   haeYritykset = (): void => {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
+      this.httpVirhe = null;
       this.suljeLataus();
       this.yritykset = data;
       this.lajitteleLista();
       //console.log(this.yritykset);
-    },(error: any) => {
+    },(error: HttpErrorResponse) => {
       // Virhe
       this.suljeLataus();
       console.error(error);
-      // TODO: Parempi virheenkäsittely
+      this.httpVirhe = `Voi ei! Jokin meni pieleen yrittäessäni etsiä alueesi palveluntarjoajia. Yritäthän myöhemmin uudelleen? (Virhekoodi: ${error.status})`;
     });
   };
   // Paikannetaan käyttäjä ja tallenna nykyinen sijainti

@@ -43,7 +43,7 @@ export class Tab2Page {
   };
 
   lataaYritystenMerkit = (): void => {
-    if(this.terveydeksi.yritykset[0]){
+    if(this.terveydeksi.yritykset){
       // Yritykset on jo ladattu
       this.terveydeksi.yritykset.forEach((yritys) => {
         let thisMarker = marker([yritys.lat,yritys.lon],{

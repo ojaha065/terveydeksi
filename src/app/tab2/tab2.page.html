@@ -10,7 +10,12 @@
   <div class="openStreetMap" #openStreetMap></div>
   <ion-list>
     <ion-list-header>Lista yrityksistä</ion-list-header>
-    <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe" class="ion-margin-start">{{ terveydeksi.paikannusvirhe }}</ion-text>
+    <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe && !terveydeksi.httpVirhe">{{ terveydeksi.paikannusvirhe }}</ion-text>
+    <div *ngIf="terveydeksi.httpVirhe">
+      <ion-text color="danger">{{ terveydeksi.httpVirhe }}</ion-text>
+      <ion-button (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
+      <ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>
+    </div>
     <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
         <ion-text color="primary">
