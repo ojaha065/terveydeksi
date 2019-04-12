@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 
 @Component({
   selector: 'app-ajanvaraus-modal',
@@ -8,10 +10,16 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
   styleUrls: ['./ajanvaraus-modal.page.scss']
 })
 export class AjanvarausModalPage implements OnInit {
+  yritys: any = this.navParams.get("yritys"); // Oma tietotyyppi tähän
+
   varaus: any = { // Oma tietotyyppi tähän
     aikaleima: null,
     klo: null,
-    palveluntarjoaja: null,
+    palveluntarjoaja: {
+      id: this.yritys.id,
+      nimi: this.yritys.nimi,
+      osoite: `${this.yritys.katuosoite}\n${this.yritys.postinumero} ${this.yritys.postitoimipaikka}`
+    },
     asiakas: null
   };
 
@@ -41,7 +49,7 @@ export class AjanvarausModalPage implements OnInit {
     else{
       this.http.post(`${this.terveydeksi.apiUrl}/tallennaAjanvaraus`,{
         token: this.terveydeksi.loginToken,
-        yritysID: this.terveydeksi.valitunYrityksenID,
+        yritysID: this.varaus.palveluntarjoaja.id,
         timestamp: this.varaus.aikaleima.getTime() / 1000 // UNIX-aikaleima
       }).subscribe((response: HttpResponse<any>): void => {
         // OK
@@ -53,7 +61,11 @@ export class AjanvarausModalPage implements OnInit {
     }
   };
 
-  constructor(private terveydeksi: TerveydeksiService,private http: HttpClient){};
+  constructor(
+    private terveydeksi: TerveydeksiService,
+    private http: HttpClient,
+    private navParams: NavParams
+  ){};
 
   ngOnInit(){};
 };
