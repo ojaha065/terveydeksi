@@ -30,14 +30,16 @@ export class Tab2Page {
   ionViewDidEnter(){
     // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
     // https://leafletjs.com/reference-1.4.0.html
-    this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
-    this.lastGeolocationLat = this.terveydeksi.currentLat || 60.1733244;
-    tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-      attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
-      maxZoom: 18
-    }).addTo(this.openStreetMap);
-    setInterval(this.updateMapWhenGeolocationChanges,5000);
-    setTimeout(this.lataaYritystenMerkit,5000);
+    if(!this.openStreetMap){
+      this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
+      this.lastGeolocationLat = this.terveydeksi.currentLat || 60.1733244;
+      tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+        attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
+        maxZoom: 18
+      }).addTo(this.openStreetMap);
+      setInterval(this.updateMapWhenGeolocationChanges,5000);
+      setTimeout(this.lataaYritystenMerkit,5000);
+    }
   };
 
   lataaYritystenMerkit = (): void => {
