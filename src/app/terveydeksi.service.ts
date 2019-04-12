@@ -37,16 +37,18 @@ export class TerveydeksiService {
   paikannusvirheDebug: string;
 
   // Tietojen latausilmoitus
-  async lataus() {
+  lataus = async (kirjautuminen?: boolean): Promise<any> => {
     const loading = await this.loadingCtrl.create({
       spinner: "bubbles",
-      message: 'Ladataan...',
-      translucent: true,
-      cssClass: 'custom-class custom-loading'
+      message: "Ladataan...",
+      translucent: true
     });
-    await loading.present();
+    // Näytetään latausilmoitus vain, jos yrityksiä ei tähän mennessä ole vielä ehditty hakea
+    if(!this.yritykset || kirjautuminen){
+      loading.present();
+    }
   };
-  suljeLataus() {
+  suljeLataus = (): void => {
     this.loadingCtrl.dismiss();
   };
 
@@ -54,9 +56,8 @@ export class TerveydeksiService {
   haeYritykset = (): void => {
     this.http.get(`${this.apiUrl}/yritykset`).subscribe((data: object[]) => {
       // OK
-      this.yritykset = data;
-      console.info("Yritykset ladattu!");
       this.suljeLataus();
+      this.yritykset = data;
       this.lajitteleLista();
       //console.log(this.yritykset);
     },(error: any) => {
@@ -76,7 +77,6 @@ export class TerveydeksiService {
 
     }).catch((error: PositionError): void => {
       // Virhe
-      this.suljeLataus();
       this.paikannusvirheDebug = error.message;
       switch(error.code){
         case 1:
@@ -132,8 +132,11 @@ export class TerveydeksiService {
     }
   };
 
-  constructor(private http: HttpClient,private geolocation: Geolocation,public loadingCtrl: LoadingController){
-    console.info("Ladataan yrityksiä...");
+  constructor(
+    private http: HttpClient,
+    private geolocation: Geolocation,
+    private loadingCtrl: LoadingController
+  ){
     this.lataus();
     this.haeYritykset(); // Haetaan yritykset heti kun service ladataan
     this.paikanna(); // Haetaan paikannustieto

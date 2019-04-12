@@ -13,7 +13,12 @@ export class Tab3Page {
   username: string;
   password: string;
 
+  nappiDisabloitu: boolean = false;
+
   kirjaudu = (): void => {
+    this.nappiDisabloitu = true;
+    this.terveydeksi.lataus(true);
+
     this.http.post(`${this.terveydeksi.apiUrl}/login`,`username=${this.username}&password=${this.password}`,{
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
@@ -22,6 +27,7 @@ export class Tab3Page {
       // OK
       //console.log(response);
       if(response.statusCode === 0){
+        this.virheteksti = null;
         this.terveydeksi.loginToken = response.token;
         this.terveydeksi.username = this.username;
         this.username = null;
@@ -31,9 +37,14 @@ export class Tab3Page {
         // Väärä käyttäjätunnus ja/tai salasana
         this.virheteksti = response.status;
       }
+      setTimeout((): void => {
+        this.terveydeksi.suljeLataus();
+      },1000);
+      this.nappiDisabloitu = false;
     },(error: HttpErrorResponse) => {
       // Virhe
       console.error(error);
+      this.nappiDisabloitu = false;
     });
   };
   kirjauduUlos = (): void => {
