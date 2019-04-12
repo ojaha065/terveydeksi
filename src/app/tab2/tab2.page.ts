@@ -70,6 +70,7 @@ export class Tab2Page {
   updateMapWhenGeolocationChanges = (): void => {
     if(this.lastGeolocationLat !== this.terveydeksi.currentLat){
       // Sijainti on muuttunut
+      this.lastGeolocationLat = this.terveydeksi.currentLat;
       this.openStreetMap.flyTo([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037]);
     }
   };
