@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
       Palvelut lähelläsi
     </ion-title>
@@ -9,7 +9,7 @@
 <ion-content>
   <div class="openStreetMap" #openStreetMap></div>
   <ion-list>
-    <ion-list-header>Lista yrityksistä</ion-list-header>
+    <ion-list-header color="primary"><h2>Lista yrityksistä</h2></ion-list-header>
     <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe && !terveydeksi.httpVirhe">{{ terveydeksi.paikannusvirhe }}</ion-text>
     <div *ngIf="terveydeksi.httpVirhe">
       <ion-text color="danger">{{ terveydeksi.httpVirhe }}</ion-text>
@@ -18,11 +18,12 @@
     </div>
     <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
-        <ion-text color="primary">
+        <ion-text>
           <h2>{{ yritys.nimi }}</h2>
         </ion-text>
-        <ion-text color="secondary">
+        <ion-text>
           <p *ngIf="yritys.distance">{{ yritys.distance.toFixed(2) }} km päässä</p>
+          <p>{{ yritys.tyyppi }}</p>
         </ion-text>
       </ion-label>
     </ion-item>
