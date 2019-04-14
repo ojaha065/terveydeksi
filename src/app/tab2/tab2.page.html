@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="dark">
     <ion-title>
       Palvelut lähelläsi
     </ion-title>
@@ -9,23 +9,23 @@
 <ion-content>
   <div class="openStreetMap" #openStreetMap></div>
   <ion-list>
-    <ion-list-header color="primary"><h2>Lista yrityksistä</h2></ion-list-header>
     <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe && !terveydeksi.httpVirhe">{{ terveydeksi.paikannusvirhe }}</ion-text>
     <div *ngIf="terveydeksi.httpVirhe">
       <ion-text color="danger">{{ terveydeksi.httpVirhe }}</ion-text>
       <ion-button (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
       <ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>
     </div>
-    <ion-item detail *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
+    <ion-item color="dark" *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
         <ion-text>
-          <h2>{{ yritys.nimi }}</h2>
+          <h1>{{ yritys.nimi }}</h1>
         </ion-text>
         <ion-text>
           <p *ngIf="yritys.distance">{{ yritys.distance.toFixed(2) }} km päässä</p>
           <p>{{ yritys.tyyppi }}</p>
         </ion-text>
       </ion-label>
+      <ion-icon name="arrow-dropright"></ion-icon>
     </ion-item>
   </ion-list>
 </ion-content>

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="dark">
     <ion-buttons slot="start">
       <ion-button (click)="suljeModal();">
         <ion-icon name="arrow-back"></ion-icon>
@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card color="dark">
     <ion-card-header>
       <ion-card-title>{{ yritys.nimi }}</ion-card-title>
       <ion-card-subtitle>{{ yritys.tyyppi }}, {{ (yritys.distance) ? yritys.distance.toFixed(2) : "?" }} km päässä</ion-card-subtitle>
@@ -24,22 +24,22 @@
       <ion-list>
         <ion-item>
           <ion-label>Katuosoite</ion-label>
-          {{ yritys.katuosoite }}
+          <p>{{ yritys.katuosoite }}</p>
         </ion-item>
         <ion-item>
           <ion-label>Postinumero ja -toimipaikka</ion-label>
-          {{ yritys.postinumero }} {{ yritys.postitoimipaikka }}
+          <p>{{ yritys.postinumero }} {{ yritys.postitoimipaikka }}</p>
         </ion-item>
         <ion-item *ngIf="yritys.puhelinnumero">
           <ion-label>Puhelinnumero</ion-label>
-          {{ yritys.puhelinnumero }}
+          <p>{{ yritys.puhelinnumero }}</p>
           <ion-button color="success">
             <ion-icon name="call"></ion-icon>
           </ion-button>
         </ion-item>
         <ion-item *ngIf="yritys.email">
           <ion-label>Sähköpostisoite</ion-label>
-          {{ yritys.email }}
+          <p>{{ yritys.email }}</p>
         </ion-item>
       </ion-list>
     </ion-card-content>
