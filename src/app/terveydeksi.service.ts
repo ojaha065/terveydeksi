@@ -36,16 +36,13 @@ export class TerveydeksiService {
   paikannusvirheDebug: string;
 
   // Tietojen latausilmoitus
-  lataus = async (kirjautuminen?: boolean): Promise<any> => {
+  lataus = async (): Promise<any> => {
     const loading = await this.loadingCtrl.create({
       spinner: "bubbles",
       message: "Ladataan...",
       translucent: true
     });
-    // Näytetään latausilmoitus vain, jos yrityksiä ei tähän mennessä ole vielä ehditty hakea
-    if(!this.yritykset || kirjautuminen){
-      loading.present();
-    }
+    loading.present();
   };
   suljeLataus = (): void => {
     this.loadingCtrl.dismiss();

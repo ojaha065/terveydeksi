@@ -17,7 +17,7 @@ export class Tab3Page {
 
   kirjaudu = (): void => {
     this.nappiDisabloitu = true;
-    this.terveydeksi.lataus(true);
+    this.terveydeksi.lataus();
 
     this.http.post(`${this.terveydeksi.apiUrl}/login`,`username=${this.username}&password=${this.password}`,{
       headers: {
