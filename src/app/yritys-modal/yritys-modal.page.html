@@ -20,28 +20,30 @@
       <ion-button *ngIf="terveydeksi.loginToken" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
-
-      <ion-list>
-        <ion-item>
-          <ion-label>Katuosoite</ion-label>
-          <p>{{ yritys.katuosoite }}</p>
-        </ion-item>
-        <ion-item>
-          <ion-label>Postinumero ja -toimipaikka</ion-label>
-          <p>{{ yritys.postinumero }} {{ yritys.postitoimipaikka }}</p>
-        </ion-item>
-        <ion-item *ngIf="yritys.puhelinnumero">
-          <ion-label>Puhelinnumero</ion-label>
-          <p>{{ yritys.puhelinnumero }}</p>
+      <ion-item color="dark">
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>{{ yritys.katuosoite }}</ion-label>
+      </ion-item>
+      <ion-item color="dark">
+          <ion-icon name="archive" slot="start"></ion-icon>
+          <ion-label>{{ yritys.postinumero }} {{ yritys.postitoimipaikka }}</ion-label>
+      </ion-item>
+      <ion-item *ngIf="yritys.puhelinnumero" color="dark">
+          <ion-icon name="call" slot="start"></ion-icon>
+          <ion-label>{{ yritys.puhelinnumero }}</ion-label>
           <ion-button color="success">
-            <ion-icon name="call"></ion-icon>
+              <ion-icon name="call"></ion-icon>
           </ion-button>
-        </ion-item>
-        <ion-item *ngIf="yritys.email">
-          <ion-label>Sähköpostisoite</ion-label>
-          <p>{{ yritys.email }}</p>
-        </ion-item>
-      </ion-list>
+      </ion-item>
+      <ion-item *ngIf="yritys.email" color="dark">
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-label>{{ yritys.email }}</ion-label>
+          <ion-button color="secondary">
+              <ion-icon name="mail-open"></ion-icon>
+          </ion-button>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
+

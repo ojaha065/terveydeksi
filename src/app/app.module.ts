@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { YritysModalPageModule } from "./yritys-modal/yritys-modal.module";
 import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.module';
 
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,6 +24,7 @@ import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.m
     StatusBar,
     SplashScreen,
     Geolocation,
+    CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

@@ -40,6 +40,7 @@ export class YritysModalPage implements OnInit {
       }).addTo(this.openStreetMap);
     };
 
+
   constructor(
     private modalController: ModalController,
     private terveydeksi: TerveydeksiService,
