@@ -95,9 +95,9 @@ export class TerveydeksiService {
       }
     });
   };
-  lajitteleLista = (): void => {
+  lajitteleLista = (vainGPS?: boolean): void => {
     // Jos meillä on hakulause, niin piilotetaan kaikki sen ulkopuoliset
-    if(this.hakulause){
+    if(this.hakulause && !vainGPS){
       // TODO
     }
 
@@ -127,7 +127,7 @@ export class TerveydeksiService {
       });
     }
     else{
-      setTimeout(this.lajitteleLista,1000); // Kokeillaan sekunin kuluttua uudelleen, jos paikannustieto silloin olisi
+      setTimeout(this.lajitteleLista.bind(true),1000); // Kokeillaan sekunin kuluttua uudelleen, jos paikannustieto silloin olisi
     }
   };
 
