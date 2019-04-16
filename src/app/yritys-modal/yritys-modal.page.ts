@@ -33,11 +33,22 @@ export class YritysModalPage implements OnInit {
     ionViewDidEnter(){
       // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
       // https://leafletjs.com/reference-1.4.0.html
-      this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.yritys.lat,this.yritys.lon],13);
+      this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.yritys.lat,this.yritys.lon],16);
       tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
-        maxZoom: 18
+        maxZoom: 20
       }).addTo(this.openStreetMap);
+
+      // Markkeri
+      let karttamerkki = marker([this.yritys.lat,this.yritys.lon],{
+        title: this.yritys.nimi,
+        alt: this.yritys.nimi
+      });
+
+      karttamerkki.options.icon.options.iconRetinaUrl = "assets/leaflet/marker-icon-2x.png";
+      karttamerkki.options.icon.options.shadowUrl = "assets/leaflet/marker-shadow.png";
+
+      karttamerkki.addTo(this.openStreetMap);
     };
 
 

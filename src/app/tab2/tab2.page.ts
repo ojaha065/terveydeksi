@@ -53,8 +53,8 @@ export class Tab2Page {
           riseOnHover: true
         });
         // Korjataan puuttuvat ikonit
-        thisMarker.options.icon.options.iconRetinaUrl = "./assets/leaflet/marker-icon-2x.png";
-        thisMarker.options.icon.options.shadowUrl = "./assets/leaflet/marker-shadow.png";
+        thisMarker.options.icon.options.iconRetinaUrl = "assets/leaflet/marker-icon-2x.png";
+        thisMarker.options.icon.options.shadowUrl = "assets/leaflet/marker-shadow.png";
 
         thisMarker.addTo(this.openStreetMap);
         thisMarker.on("click",() => {
