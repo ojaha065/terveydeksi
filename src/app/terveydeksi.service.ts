@@ -45,7 +45,7 @@ export class TerveydeksiService {
       translucent: true,
       backdropDismiss: true,
     });
-    loading.present();
+    await loading.present();
   };
   suljeLataus = (): void => {
     this.loadingCtrl.dismiss();
@@ -57,18 +57,14 @@ export class TerveydeksiService {
       // OK
       this.httpVirhe = null;
       this.yritykset = data;
-      setTimeout((): void => {
-        this.suljeLataus();
-      },1000);
       this.lajitteleLista();
+      this.suljeLataus();
       //console.log(this.yritykset);
     },(error: HttpErrorResponse) => {
       // Virhe
-      setTimeout((): void => {
-        this.suljeLataus();
-      },1000);
       console.error(error);
       this.httpVirhe = `Voi ei! Jokin meni pieleen yrittäessäni etsiä alueesi palveluntarjoajia. Yritäthän myöhemmin uudelleen? (Virhekoodi: ${error.status})`;
+      this.suljeLataus();
     });
   };
   // Paikannetaan käyttäjä ja tallenna nykyinen sijainti
@@ -140,8 +136,10 @@ export class TerveydeksiService {
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController
   ){
-    this.lataus();
-    this.haeYritykset(); // Haetaan yritykset heti kun service ladataan
-    this.paikanna(); // Haetaan paikannustieto
+    this.lataus().then(() => {
+      // Lataus valmis
+      this.haeYritykset(); // Haetaan yritykset
+      this.paikanna(); // Haetaan paikannustieto
+    });
   };
 };

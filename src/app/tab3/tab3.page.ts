@@ -17,34 +17,32 @@ export class Tab3Page {
 
   kirjaudu = (): void => {
     this.nappiDisabloitu = true;
-    this.terveydeksi.lataus();
-
-    this.http.post(`${this.terveydeksi.apiUrl}/login`,`username=${this.username}&password=${this.password}`,{
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      }
-    }).subscribe((response: any): void => { // response tarvitsee oman tietotyypin
-      // OK
-      //console.log(response);
-      if(response.statusCode === 0){
-        this.virheteksti = null;
-        this.terveydeksi.loginToken = response.token;
-        this.terveydeksi.username = this.username;
-        this.username = null;
-        this.password = null;
-      }
-      else{
-        // Väärä käyttäjätunnus ja/tai salasana
-        this.virheteksti = response.status;
-      }
-      setTimeout((): void => {
+    this.terveydeksi.lataus().then((): void => {
+      this.http.post(`${this.terveydeksi.apiUrl}/login`,`username=${this.username}&password=${this.password}`,{
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }).subscribe((response: any): void => { // response tarvitsee oman tietotyypin
+        // OK
+        //console.log(response);
+        if(response.statusCode === 0){
+          this.virheteksti = null;
+          this.terveydeksi.loginToken = response.token;
+          this.terveydeksi.username = this.username;
+          this.username = null;
+          this.password = null;
+        }
+        else{
+          // Väärä käyttäjätunnus ja/tai salasana
+          this.virheteksti = response.status;
+        }
+        this.nappiDisabloitu = false;
         this.terveydeksi.suljeLataus();
-      },1000);
-      this.nappiDisabloitu = false;
-    },(error: HttpErrorResponse) => {
-      // Virhe
-      console.error(error);
-      this.nappiDisabloitu = false;
+      },(error: HttpErrorResponse) => {
+        // Virhe
+        console.error(error);
+        this.nappiDisabloitu = false;
+      });
     });
   };
   kirjauduUlos = (): void => {
