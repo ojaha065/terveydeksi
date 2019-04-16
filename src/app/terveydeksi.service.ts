@@ -35,6 +35,8 @@ export class TerveydeksiService {
   paikannusvirhe: string;
   paikannusvirheDebug: string;
 
+  hakulause: string;
+
   // Tietojen latausilmoitus
   lataus = async (): Promise<any> => {
     const loading = await this.loadingCtrl.create({
@@ -98,7 +100,12 @@ export class TerveydeksiService {
     });
   };
   lajitteleLista = (): void => {
-    // Lajitellaan vain, jos meillä on paikannustieto
+    // Jos meillä on hakulause, niin piilotetaan kaikki sen ulkopuoliset
+    if(this.hakulause){
+      // TODO
+    }
+
+    // Lajitellaan sijainnin mukaan vain, jos meillä on paikannustieto
     if(this.currentLat && this.currentLon){
       // Lasketaan jokaiselle yritykselle etäisyys nykyisestä sijainnista
       // https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
