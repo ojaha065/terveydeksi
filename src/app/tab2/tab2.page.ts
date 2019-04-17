@@ -55,6 +55,7 @@ export class Tab2Page {
         // Korjataan puuttuvat ikonit
         thisMarker.options.icon.options.iconRetinaUrl = "assets/leaflet/marker-icon-2x.png";
         thisMarker.options.icon.options.shadowUrl = "assets/leaflet/marker-shadow.png";
+        //console.log(thisMarker);
 
         thisMarker.addTo(this.openStreetMap);
         thisMarker.on("click",() => {
@@ -75,5 +76,5 @@ export class Tab2Page {
     }
   };
 
-  constructor(private terveydeksi: TerveydeksiService,private modalController: ModalController){};
+  constructor(public terveydeksi: TerveydeksiService,private modalController: ModalController){};
 };

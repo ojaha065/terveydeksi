@@ -12,5 +12,5 @@ export class Tab1Page {
     this.router.navigateByUrl("/tabs/tab2");
   };
 
-  constructor(private router: Router,private terveydeksi: TerveydeksiService){};
+  constructor(public terveydeksi: TerveydeksiService,private router: Router){};
 };

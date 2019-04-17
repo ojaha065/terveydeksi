@@ -42,8 +42,7 @@ export class TerveydeksiService {
     const loading = await this.loadingCtrl.create({
       spinner: "bubbles",
       message: "Ladataan...",
-      translucent: true,
-      backdropDismiss: true,
+      translucent: true
     });
     await loading.present();
   };

@@ -50,5 +50,5 @@ export class Tab3Page {
     this.terveydeksi.username = null;
   };
 
-  constructor(private http: HttpClient,private terveydeksi: TerveydeksiService){};
+  constructor(public terveydeksi: TerveydeksiService,private http: HttpClient){};
 };

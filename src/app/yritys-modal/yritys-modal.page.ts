@@ -54,7 +54,7 @@ export class YritysModalPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private terveydeksi: TerveydeksiService,
+    public terveydeksi: TerveydeksiService,
     private navParams: NavParams
   ){};
 
