@@ -27,7 +27,10 @@ sitten `npm start` tai `ionic serve --devapp`
 (Itse olen huomannut, että npm start -komentoa käytettäissä komentorivi-ikkuna jää välillä jumiin palvelimen sammuttamisen yhteydessä.)
 
 ## Backend
-Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS REST-apia, joka löytyy osoitteesta https://terveydeksi.azurewebsites.net/. APIn käyttöohjeet löytyvät sen omasta [reposta](https://github.com/ojaha065/terveydeksiBackend).
+Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS REST-apia, joka löytyy osoitteesta https://terveydeksi.azurewebsites.net. APIn käyttöohjeet löytyvät sen omasta [reposta](https://github.com/ojaha065/terveydeksiBackend).
+
+## Käännökset
+* [Selainversio](https://terveydeksi.herokuapp.com)
 
 ## Muutama lisähuomio
 * Käytetään GitHubin issueita hyväksi. Issuen voi _assign_ tietylle henkilölle, jolloin pysytään kartalla, että kenen vastuulla on
