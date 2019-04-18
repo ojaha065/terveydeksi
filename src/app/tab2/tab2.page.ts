@@ -26,6 +26,11 @@ export class Tab2Page {
     modal.present();
   };
 
+  showAll = (): void => {
+    this.terveydeksi.hakulause = null;
+    this.terveydeksi.lajitteleLista();
+  };
+
   // Kun DOM on ladattu
   ionViewDidEnter(){
     // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
@@ -73,6 +78,7 @@ export class Tab2Page {
       // Sijainti on muuttunut
       this.lastGeolocationLat = this.terveydeksi.currentLat;
       this.openStreetMap.flyTo([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037]);
+      this.terveydeksi.lajitteleLista();
     }
   };
 

@@ -8,7 +8,13 @@ import { TerveydeksiService } from '../terveydeksi.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  hae = () => {
+  haeNykAlueelta = (): void => {
+    // TODO: Ilmoita jos ei GPS-signaalia
+    this.router.navigateByUrl("/tabs/tab2");
+  };
+
+  hae = (): void => {
+    this.terveydeksi.lajitteleLista();
     this.router.navigateByUrl("/tabs/tab2");
   };
 

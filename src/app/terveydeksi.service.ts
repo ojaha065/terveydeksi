@@ -24,6 +24,7 @@ export class TerveydeksiService {
   // Uusi tietotyyppi pitää luoda sen perusteella mitä REST-api palauttaa.
   // Kirjointin määrittelyn REST-apin repoon. T: Jani
   yritykset: any[];
+  piilotetutYritykset: any[] = [];
   httpVirhe: string;
 
   loginToken: string;
@@ -41,7 +42,7 @@ export class TerveydeksiService {
   lataus = async (): Promise<any> => {
     const loading = await this.loadingCtrl.create({
       spinner: "bubbles",
-      message: "Ladataan...",
+      message: "Ladataan...(Tämä voi kestää hetken)",
       translucent: true
     });
     await loading.present();
@@ -95,16 +96,32 @@ export class TerveydeksiService {
     });
   };
   lajitteleLista = (vainGPS?: boolean): void => {
+    // Palautetaan kaikki yritykset näkyviin
+    if(!vainGPS){
+      this.piilotetutYritykset.forEach((yritys) => {
+        this.yritykset.push(yritys);
+      });
+      this.piilotetutYritykset = [];
+    }
+
     // Jos meillä on hakulause, niin piilotetaan kaikki sen ulkopuoliset
+    // Muutoin näytetään kaikki
     if(this.hakulause && !vainGPS){
-      // TODO
+      let hakulauseUpper: string = this.hakulause.toUpperCase();
+      // For-looppi on "takeperin", jotta yritysten poistaminen ei vaikuta indekseihin
+      for(let i: number = this.yritykset.length - 1;i >= 0;i--){
+        if(!(this.yritykset[i].postitoimipaikka.toUpperCase() === hakulauseUpper)){
+          this.piilotetutYritykset.push(this.yritykset[i]);
+          this.yritykset.splice(i,1);
+        }
+      }
     }
 
     // Lajitellaan sijainnin mukaan vain, jos meillä on paikannustieto
     if(this.currentLat && this.currentLon){
       // Lasketaan jokaiselle yritykselle etäisyys nykyisestä sijainnista
       // https://stackoverflow.com/questions/365826/calculate-distance-between-2-gps-coordinates
-      this.yritykset.forEach((yritys): void => {
+      this.yritykset.forEach((yritys: any): void => {
         let deltaLat: number = (yritys.lat - this.currentLat) * Math.PI / 180;
         let deltaLon: number = (yritys.lon - this.currentLon) * Math.PI / 180;
 
@@ -126,7 +143,10 @@ export class TerveydeksiService {
       });
     }
     else{
-      setTimeout(this.lajitteleLista.bind(true),1000); // Kokeillaan sekunin kuluttua uudelleen, jos paikannustieto silloin olisi
+      // Kokeillaan sekunin kuluttua uudelleen, jos paikannustieto silloin olisi
+      setTimeout(() => {
+        this.lajitteleLista(true);
+      },1000);
     }
   };
 

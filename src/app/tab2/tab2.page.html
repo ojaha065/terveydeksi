@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title>
-      Palvelut lähelläsi
+      {{ terveydeksi.hakulause ? "Hae palveluja" : "Palvelut lähelläsi" }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,6 +14,11 @@
       <ion-text color="danger">{{ terveydeksi.httpVirhe }}</ion-text>
       <ion-button (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
       <ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>
+    </div>
+    <div *ngIf="terveydeksi.hakulause">
+      <h3 *ngIf="terveydeksi.yritykset.length > 0">Palvelut paikkakunnalla {{ terveydeksi.hakulause | titlecase }} ({{ terveydeksi.yritykset.length }} kpl)</h3>
+      <h3 *ngIf="terveydeksi.yritykset.length === 0">Ei hakuloksia hakusanalla {{ terveydeksi.hakulause }}</h3>
+      <ion-button (click)="showAll();">Näytä kaikki</ion-button>
     </div>
     <ion-item color="dark" *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
