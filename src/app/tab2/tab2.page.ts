@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { TerveydeksiService } from '../terveydeksi.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform, NavController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -10,6 +11,12 @@ import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  subscription: Subscription;
+  yritysModalAuki: boolean = false;
+  ionViewWillLeave(){
+    this.subscription.unsubscribe();
+  };
+
   // Haetaan elementti sivulta
   @ViewChild("openStreetMap") mapContainer: any;
 
@@ -23,6 +30,10 @@ export class Tab2Page {
         yritys: yritys
       }
     });
+    this.yritysModalAuki = true;
+    modal.onDidDismiss().then((): void => {
+      this.yritysModalAuki = false;
+    });
     modal.present();
   };
 
@@ -33,6 +44,16 @@ export class Tab2Page {
 
   // Kun DOM on ladattu
   ionViewDidEnter(){
+    // Palaa etusivulle back-buttonilla
+    this.subscription = this.platform.backButton.subscribe((): void => {
+      if(this.yritysModalAuki){
+        this.navController.pop();
+      }
+      else{
+        this.navController.navigateRoot("/");
+      }
+    });
+
     // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
     // https://leafletjs.com/reference-1.4.0.html
     if(!this.openStreetMap){
@@ -82,5 +103,10 @@ export class Tab2Page {
     }
   };
 
-  constructor(public terveydeksi: TerveydeksiService,private modalController: ModalController){};
+  constructor(
+    public terveydeksi: TerveydeksiService,
+    private modalController: ModalController,
+    private platform: Platform,
+    private navController: NavController
+  ){};
 };

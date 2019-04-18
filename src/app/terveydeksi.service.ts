@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Platform } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -153,12 +153,17 @@ export class TerveydeksiService {
   constructor(
     private http: HttpClient,
     private geolocation: Geolocation,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private platform: Platform
   ){
-    this.lataus().then(() => {
-      // Lataus valmis
-      this.haeYritykset(); // Haetaan yritykset
-      this.paikanna(); // Haetaan paikannustieto
+    this.platform.ready().then((): void => {
+      this.lataus().then(() => {
+        // Lataus valmis
+        this.haeYritykset(); // Haetaan yritykset
+        this.paikanna(); // Haetaan paikannustieto
+      });
+    }).catch((error: Error) => {
+      console.error(error);
     });
   };
 };

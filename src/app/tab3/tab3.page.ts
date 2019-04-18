@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { TerveydeksiService } from '../terveydeksi.service';
+import { Subscription } from 'rxjs';
+import { Platform, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -8,6 +10,18 @@ import { TerveydeksiService } from '../terveydeksi.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  // Palaa etusivulle
+  subscription: Subscription;
+  ionViewDidEnter(){
+    // Palaa etusivulle back-buttonilla
+    this.subscription = this.platform.backButton.subscribe((): void => {
+      this.navController.navigateRoot("/");
+    });
+  };
+  ionViewWillLeave(){
+    this.subscription.unsubscribe();
+  };
+
   virheteksti: string;
 
   username: string;
@@ -50,5 +64,10 @@ export class Tab3Page {
     this.terveydeksi.username = null;
   };
 
-  constructor(public terveydeksi: TerveydeksiService,private http: HttpClient){};
+  constructor(
+    public terveydeksi: TerveydeksiService,
+    private http: HttpClient,
+    private platform: Platform,
+    private navController: NavController
+  ){};
 };
