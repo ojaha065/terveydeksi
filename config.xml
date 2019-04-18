@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.furraccoon.terveydeksi" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.furraccoon.terveydeksi" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Terveydeksi - Ammattilaiset lähelläsi</name>
     <description>Terveydenhuollon palvelut lähelläsi</description>
-    <author email="ojaha065@edu.xamk.fi" href="http://jaha1.mbnet.fi/">Jani Haiko ja Jere Länsipii</author>
+    <author email="ojaha065@edu.xamk.fi" href="http://jaha1.mbnet.fi">Jani Haiko</author>
+    <author email="ojela028@edu.xamk.fi" href="https://github.com/ojela028xamk">Jere Länsipii</author>
     <content src="index.html" />
     <access origin="*" />
     <preference name="ScrollEnabled" value="false" />
