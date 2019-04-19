@@ -1,7 +1,8 @@
 import { Injectable, Optional } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
-import { LoadingController, Platform } from '@ionic/angular';
+import { LoadingController, Platform, ToastController } from '@ionic/angular';
+import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -150,10 +151,20 @@ export class TerveydeksiService {
     }
   };
 
+  toast = async(message: string): Promise<any> => {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000,
+      position: "bottom"
+    });
+    toast.present();
+  };
+
   constructor(
     private http: HttpClient,
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
     private platform: Platform
   ){
     this.platform.ready().then((): void => {

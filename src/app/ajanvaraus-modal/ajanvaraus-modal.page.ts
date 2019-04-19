@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 
 @Component({
   selector: 'app-ajanvaraus-modal',
@@ -40,9 +39,7 @@ export class AjanvarausModalPage implements OnInit {
         console.error(`${error.status}: ${error.statusText}`);
       });
 
-      // Säädetään aikaleimaa valitun kellonajan mukaan
-      let kellonaika = new Date(this.varaus.klo);
-      console.log(kellonaika);
+      let kellonaika = new Date(this.varaus.klo); // Säädetään aikaleimaa valitun kellonajan mukaan
       this.varaus.aikaleima.setHours(kellonaika.getHours(),kellonaika.getMinutes());
       this.page1 = false;
     }
@@ -53,10 +50,12 @@ export class AjanvarausModalPage implements OnInit {
         timestamp: this.varaus.aikaleima.getTime() / 1000 // UNIX-aikaleima
       }).subscribe((response: HttpResponse<any>): void => {
         // OK
-        // Tässä pitäisi kertoa onnistuneesta varauksesta (esim. Toast-ilmoitus)
+        this.terveydeksi.toast("Varaus tallennettu onnistuneesti.")
         this.page1 = true;
+        this.modalController.dismiss();
       },(error: HttpErrorResponse): void => {
         console.error(`${error.status}: ${error.statusText}`);
+        this.terveydeksi.toast(`Virhekoodi ${error.status}! Varausta ei tallennettu. Yritä myöhemmin uudelleen.`)
       });
     }
   };
@@ -64,7 +63,8 @@ export class AjanvarausModalPage implements OnInit {
   constructor(
     private terveydeksi: TerveydeksiService,
     private http: HttpClient,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private modalController: ModalController
   ){};
 
   ngOnInit(){};

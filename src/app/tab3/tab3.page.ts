@@ -45,6 +45,7 @@ export class Tab3Page {
           this.terveydeksi.username = this.username;
           this.username = null;
           this.password = null;
+          this.terveydeksi.toast("Kirjautuminen onnistui!");
         }
         else{
           // Väärä käyttäjätunnus ja/tai salasana
@@ -56,12 +57,14 @@ export class Tab3Page {
         // Virhe
         console.error(error);
         this.nappiDisabloitu = false;
+        this.terveydeksi.suljeLataus();
       });
     });
   };
   kirjauduUlos = (): void => {
     this.terveydeksi.loginToken = null;
     this.terveydeksi.username = null;
+    this.terveydeksi.toast("Sinut kirjattiin ulos.");
   };
 
   constructor(
