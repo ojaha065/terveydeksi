@@ -43,7 +43,7 @@ export class TerveydeksiService {
   lataus = async (): Promise<any> => {
     const loading = await this.loadingCtrl.create({
       spinner: "bubbles",
-      message: "Ladataan...(Tämä voi kestää hetken)",
+      message: "Ladataan...(Tämä voi kestää hetken #blameAzure)",
       translucent: true
     });
     await loading.present();

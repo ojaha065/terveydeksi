@@ -68,10 +68,10 @@ export class Tab2Page {
     }
   };
 
-  lataaYritystenMerkit = (): void => {
+  lataaYritystenMerkit = (bugfix?: boolean): void => {
     if(this.terveydeksi.yritykset){
       // Yritykset on jo ladattu
-      this.terveydeksi.yritykset.forEach((yritys) => {
+      this.terveydeksi[bugfix ? "piilotetut" : "yritykset"].forEach((yritys: any) => {
         let thisMarker = marker([yritys.lat,yritys.lon],{
           // Markerin asetukset
           title: yritys.nimi,
@@ -88,6 +88,9 @@ export class Tab2Page {
           this.avaaYritysModal(yritys);
         });
       });
+      if(!bugfix){
+        this.lataaYritystenMerkit(true);
+      }
     }
     else{
       // Yrityksiä ei ole vielä ladattu
