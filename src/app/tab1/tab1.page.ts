@@ -10,6 +10,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  hakulause: string;
+
   // Sulje sovellus back-buttonilla
   subscription: Subscription;
   ionViewDidEnter(){
@@ -22,17 +24,19 @@ export class Tab1Page {
   };
 
   haeNykAlueelta = (): void => {
-    // TODO: Ilmoita jos ei GPS-signaalia
+    this.terveydeksi.hakulause = null;
+    this.terveydeksi.paikanna();
     this.router.navigateByUrl("/tabs/tab2");
   };
 
   hae = (): void => {
+    this.terveydeksi.hakulause = this.hakulause;
     this.terveydeksi.lajitteleLista();
     this.router.navigateByUrl("/tabs/tab2");
   };
 
   constructor(
-    public terveydeksi: TerveydeksiService,
+    private terveydeksi: TerveydeksiService,
     private router: Router,
     private platform: Platform
   ){};

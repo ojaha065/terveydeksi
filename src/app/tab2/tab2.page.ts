@@ -3,7 +3,7 @@ import { TerveydeksiService } from '../terveydeksi.service';
 import { ModalController, Platform, NavController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
-import { Subscription } from 'rxjs';
+import { Subscription, TimeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -12,9 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class Tab2Page {
   subscription: Subscription;
+  mapInterval: any;
   yritysModalAuki: boolean = false;
   ionViewWillLeave(){
     this.subscription.unsubscribe();
+    if(this.mapInterval){
+      clearInterval(this.mapInterval);
+    }
   };
 
   // Haetaan elementti sivulta
@@ -22,6 +26,7 @@ export class Tab2Page {
 
   openStreetMap: Map;
   lastGeolocationLat: number;
+  hakulauseMuisti: string;
 
   avaaYritysModal = async (yritys: object): Promise<any> => {
     const modal = await this.modalController.create({
@@ -63,15 +68,19 @@ export class Tab2Page {
         attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
         maxZoom: 18
       }).addTo(this.openStreetMap);
-      setInterval(this.updateMapWhenGeolocationChanges,5000);
+      this.mapInterval = setInterval(this.updateMap,2500);
       setTimeout(this.lataaYritystenMerkit,5000);
+    }
+    else{
+      // Kartta on jo olemassa, aloitetaan vain päivitys
+      this.mapInterval = setInterval(this.updateMap,2500);
     }
   };
 
   lataaYritystenMerkit = (bugfix?: boolean): void => {
     if(this.terveydeksi.yritykset){
       // Yritykset on jo ladattu
-      this.terveydeksi[bugfix ? "piilotetut" : "yritykset"].forEach((yritys: any) => {
+      this.terveydeksi[bugfix ? "piilotetutYritykset" : "yritykset"].forEach((yritys: any) => {
         let thisMarker = marker([yritys.lat,yritys.lon],{
           // Markerin asetukset
           title: yritys.nimi,
@@ -97,13 +106,22 @@ export class Tab2Page {
       setTimeout(this.lataaYritystenMerkit,2500);
     }
   };
-  updateMapWhenGeolocationChanges = (): void => {
-    if(this.lastGeolocationLat !== this.terveydeksi.currentLat){
+  updateMap = (): void => {
+    // Siirretään kartta haettuun kaupunkiin
+    if(this.terveydeksi.hakulause && this.hakulauseMuisti !== this.terveydeksi.hakulause && this.terveydeksi.yritykset[0]){
+      this.hakulauseMuisti = this.terveydeksi.hakulause;
+      this.openStreetMap.flyTo([this.terveydeksi.yritykset[0].lat,this.terveydeksi.yritykset[0].lon],10);
+    }
+    else if(this.lastGeolocationLat !== this.terveydeksi.currentLat){
       // Sijainti on muuttunut
       this.lastGeolocationLat = this.terveydeksi.currentLat;
       this.openStreetMap.flyTo([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037]);
       this.terveydeksi.lajitteleLista();
     }
+  };
+  locateButton = (): void => {
+    this.terveydeksi.paikanna();
+    this.lastGeolocationLat = -1;
   };
 
   constructor(

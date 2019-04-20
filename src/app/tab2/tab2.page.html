@@ -3,6 +3,9 @@
     <ion-title>
       {{ terveydeksi.hakulause ? "Hae palveluja" : "Palvelut lähelläsi" }}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="locateButton();"><ion-icon name="locate"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

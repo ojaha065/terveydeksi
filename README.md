@@ -29,8 +29,9 @@ sitten `npm start` tai `ionic serve --devapp`
 ## Backend
 Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS REST-apia, joka löytyy osoitteesta https://terveydeksi.azurewebsites.net. APIn käyttöohjeet löytyvät sen omasta [reposta](https://github.com/ojaha065/terveydeksiBackend).
 
-## Käännökset
-* [Selainversio](https://terveydeksi.herokuapp.com)
+## Käännetyt versiot
+* Android-apk löytyy builds-kansiosta (juuressa)
+* [Selainversio](https://terveydeksi.herokuapp.com) (Ei PWA)
 
 ## Muutama lisähuomio
 * Käytetään GitHubin issueita hyväksi. Issuen voi _assign_ tietylle henkilölle, jolloin pysytään kartalla, että kenen vastuulla on
