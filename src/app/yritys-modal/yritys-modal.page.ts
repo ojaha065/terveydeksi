@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AjanvarausModalPage } from '../ajanvaraus-modal/ajanvaraus-modal.page';
 import { TerveydeksiService } from '../terveydeksi.service';
-import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
+import { Map, tileLayer, marker } from "leaflet";
 
 @Component({
   selector: 'app-yritys-modal',

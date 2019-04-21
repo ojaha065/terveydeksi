@@ -76,6 +76,10 @@ export class TerveydeksiService {
       this.currentLat = result.coords.latitude;
       this.currentLon = result.coords.longitude;
 
+      // Varmistetaan, että joka paikannuskerralla sijainti on hieman eri, jotta kartta siirtyy
+      // Huono ratkaisu, mutta toimii.
+      this.currentLat += Math.random() * 0.0001;
+
     }).catch((error: PositionError): void => {
       // Virhe
       this.paikannusvirheDebug = error.message;

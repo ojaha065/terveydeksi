@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { ModalController, Platform, NavController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
-import { Map, latLng, tileLayer, Layer, marker, Icon } from "leaflet";
-import { Subscription, TimeInterval } from 'rxjs';
+import { Map, tileLayer, marker } from "leaflet";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tab2',
@@ -27,6 +27,7 @@ export class Tab2Page {
   openStreetMap: Map;
   lastGeolocationLat: number;
   hakulauseMuisti: string;
+  locateButtonPainettu: boolean = false;
 
   avaaYritysModal = async (yritys: object): Promise<any> => {
     const modal = await this.modalController.create({
@@ -103,7 +104,7 @@ export class Tab2Page {
     }
     else{
       // Yrityksiä ei ole vielä ladattu
-      setTimeout(this.lataaYritystenMerkit,2500);
+      setTimeout(this.lataaYritystenMerkit,1000);
     }
   };
   updateMap = (): void => {
@@ -112,14 +113,16 @@ export class Tab2Page {
       this.hakulauseMuisti = this.terveydeksi.hakulause;
       this.openStreetMap.flyTo([this.terveydeksi.yritykset[0].lat,this.terveydeksi.yritykset[0].lon],10);
     }
-    else if(this.lastGeolocationLat !== this.terveydeksi.currentLat){
+    else if((!this.terveydeksi.hakulause || this.locateButtonPainettu) && this.lastGeolocationLat !== this.terveydeksi.currentLat){
       // Sijainti on muuttunut
+      this.locateButtonPainettu = false;
       this.lastGeolocationLat = this.terveydeksi.currentLat;
       this.openStreetMap.flyTo([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037]);
       this.terveydeksi.lajitteleLista();
     }
   };
   locateButton = (): void => {
+    this.locateButtonPainettu = true;
     this.terveydeksi.paikanna();
     this.lastGeolocationLat = -1;
   };
