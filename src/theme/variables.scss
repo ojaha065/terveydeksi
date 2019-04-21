@@ -4,12 +4,10 @@
 /** Ionic CSS Variables **/
 :root {
 
-  /** Värit **/
-  --ion-background-color: linear-gradient(to bottom, rgb(114, 219, 175) 0%,rgb(150, 221, 191) 100%);
+  ion-content{
+    --ion-background-color: linear-gradient(to bottom, rgb(57, 218, 156) 0%,rgb(57, 218, 119) 100%);
+  }
 
-
-  /** fontit **/
-  
   /** primary **/
   --ion-color-primary: #3881ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -60,7 +58,7 @@
 
   /** dark **/
   --ion-color-dark: #222428;
-  --ion-color-dark-rgb: 34, 34, 34;
+  --ion-color-dark-rgb: 34, 36, 40;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
   --ion-color-dark-shade: #1e2023;

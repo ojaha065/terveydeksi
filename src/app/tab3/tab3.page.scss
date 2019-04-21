@@ -2,3 +2,7 @@ ion-input{
     --placeholder-color: white;
     --placeholder-opacity: 0.75;
 }
+
+ion-content{
+    --ion-background-color: linear-gradient(to bottom, rgb(57, 94, 218) 0%,rgb(57, 132, 218) 100%);
+}

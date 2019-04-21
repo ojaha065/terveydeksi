@@ -1,6 +1,7 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Varaa aika</ion-title>
+  <ion-toolbar color="dark">
+    <ion-title *ngIf="page1">Varaa aika</ion-title>
+    <ion-title *ngIf="!page1">Varauksen tiedot</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,12 +21,48 @@
     </ion-item>
   </div>
 
-  <div *ngIf="!page1">
+  <ion-card *ngIf="!page1" color="dark">
     <!-- Tässä pitäisi näkyä varauksen tiedot -->
-    {{ varaus | json }}
-  </div>
+    <ion-item-divider color="dark">
+      <ion-icon name="time" slot="start"></ion-icon>
+      <ion-label>AJANVARAUS</ion-label>
+    </ion-item-divider>
+    <ion-item color="dark">
+      <ion-label>Aika: {{ varaus.aikaleima }} {{ varaus.klo }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Yritys: {{ varaus.palveluntarjoaja.nimi }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Osoite: {{ varaus.palveluntarjoaja.osoite }}</ion-label>
+    </ion-item>
+    <ion-item-divider color="dark">
+      <ion-icon name="person" slot="start"></ion-icon>
+      <ion-label>OMAT TIEDOT</ion-label>
+    </ion-item-divider>
+    <ion-item color="dark">
+      <ion-label>Etu- ja sukunimi: {{ varaus.asiakas[0].etunimi }} {{ varaus.asiakas[0].sukunimi }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Osoite: {{ varaus.asiakas[0].katuosoite }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Postinumero: {{ varaus.asiakas[0].postinumero }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Postitoimipaikka: {{ varaus.asiakas[0].postitoimipaikka }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Puhelinnumero: {{ varaus.asiakas[0].puhelinnumero }}</ion-label>
+    </ion-item>
+    <ion-item color="dark">
+      <ion-label>Email: {{ varaus.asiakas[0].email }}</ion-label>
+    </ion-item>
+     <!-- {{ varaus | json }} -->   
+  </ion-card>
 </ion-content>
 
 <ion-footer *ngIf="varaus.aikaleima && varaus.klo">
-  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
+  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
 </ion-footer>
+
