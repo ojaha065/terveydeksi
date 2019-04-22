@@ -15,20 +15,19 @@
     >
     </ionic-calendar-date-picker>
 
-    <ion-item *ngIf="varaus.aikaleima">
+    <ion-item *ngIf="varaus.valittuDate">
       <ion-label>Valitse kellonaika</ion-label>
       <ion-datetime [(ngModel)]="varaus.klo" displayFormat="H:mm" cancelText="Peruuta" doneText="Ok" minuteValues="0,15,30,45"></ion-datetime>
     </ion-item>
   </div>
 
   <ion-card *ngIf="!page1" color="dark">
-    <!-- Tässä pitäisi näkyä varauksen tiedot -->
     <ion-item-divider color="dark">
       <ion-icon name="time" slot="start"></ion-icon>
       <ion-label>AJANVARAUS</ion-label>
     </ion-item-divider>
     <ion-item color="dark">
-      <ion-label>Aika: {{ varaus.aikaleima }} {{ varaus.klo }}</ion-label>
+      <ion-label>Aika: {{ varaus.valittuDatePinta }} klo. {{ varaus.klo | date:"shortTime":undefined:"fi" }}</ion-label>
     </ion-item>
     <ion-item color="dark">
       <ion-label>Yritys: {{ varaus.palveluntarjoaja.nimi }}</ion-label>
@@ -41,28 +40,27 @@
       <ion-label>OMAT TIEDOT</ion-label>
     </ion-item-divider>
     <ion-item color="dark">
-      <ion-label>Etu- ja sukunimi: {{ varaus.asiakas[0].etunimi }} {{ varaus.asiakas[0].sukunimi }}</ion-label>
+      <ion-label>Etu- ja sukunimi: {{ varaus.asiakas.etunimi }} {{ varaus.asiakas.sukunimi }}</ion-label>
     </ion-item>
     <ion-item color="dark">
-      <ion-label>Osoite: {{ varaus.asiakas[0].katuosoite }}</ion-label>
+      <ion-label>Osoite: {{ varaus.asiakas.katuosoite }}</ion-label>
     </ion-item>
     <ion-item color="dark">
-      <ion-label>Postinumero: {{ varaus.asiakas[0].postinumero }}</ion-label>
+      <ion-label>Postinumero: {{ varaus.asiakas.postinumero }}</ion-label>
     </ion-item>
     <ion-item color="dark">
-      <ion-label>Postitoimipaikka: {{ varaus.asiakas[0].postitoimipaikka }}</ion-label>
+      <ion-label>Postitoimipaikka: {{ varaus.asiakas.postitoimipaikka }}</ion-label>
     </ion-item>
     <ion-item color="dark">
-      <ion-label>Puhelinnumero: {{ varaus.asiakas[0].puhelinnumero }}</ion-label>
+      <ion-label>Puhelinnumero: {{ varaus.asiakas.puhelinnumero }}</ion-label>
     </ion-item>
     <ion-item color="dark">
-      <ion-label>Email: {{ varaus.asiakas[0].email }}</ion-label>
-    </ion-item>
-     <!-- {{ varaus | json }} -->   
+      <ion-label>Email: {{ varaus.asiakas.email }}</ion-label>
+    </ion-item>  
   </ion-card>
 </ion-content>
 
-<ion-footer *ngIf="varaus.aikaleima && varaus.klo">
-  <ion-button (click)="varausSeuraavaNappi();" expand="block" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
+<ion-footer *ngIf="varaus.valittuDate && varaus.klo">
+  <ion-button (click)="varausSeuraavaNappi();" [disabled]="seuraavaNappiDisabloitu" expand="block" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
 </ion-footer>
 
