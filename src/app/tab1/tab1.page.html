@@ -10,6 +10,6 @@
 
 <ion-content padding>
   <ion-img src="assets/tervlogo2.png" alt="placeholderkuva"></ion-img>
-  <ion-button (click)="haeNykAlueelta();" color="light" size="default" expand="block">Hae lähialueilta<ion-icon name="locate"></ion-icon></ion-button>
+  <ion-button (click)="haeNykAlueelta();" color="light" size="large" expand="block">Hae lähialueilta<ion-icon name="locate"></ion-icon></ion-button>
   <ion-searchbar (keyup.enter)="hae();" [(ngModel)]="hakulause" color="light" placeholder="Kaupungin nimi..." autocomplete="on" autocorrect="on" animated></ion-searchbar>
 </ion-content>
