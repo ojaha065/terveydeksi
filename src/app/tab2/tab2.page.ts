@@ -111,7 +111,7 @@ export class Tab2Page {
     // Siirretään kartta haettuun kaupunkiin
     if(this.terveydeksi.hakulause && this.hakulauseMuisti !== this.terveydeksi.hakulause && this.terveydeksi.yritykset[0]){
       this.hakulauseMuisti = this.terveydeksi.hakulause;
-      this.openStreetMap.flyTo([this.terveydeksi.yritykset[0].lat,this.terveydeksi.yritykset[0].lon],10);
+      this.openStreetMap.flyTo([this.terveydeksi.yritykset[0].lat,this.terveydeksi.yritykset[0].lon],12);
     }
     else if((!this.terveydeksi.hakulause || this.locateButtonPainettu) && this.lastGeolocationLat !== this.terveydeksi.currentLat){
       // Sijainti on muuttunut
