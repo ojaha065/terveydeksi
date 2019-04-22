@@ -10,6 +10,7 @@ import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/htt
 })
 export class AjanvarausModalPage implements OnInit {
   yritys: any = this.navParams.get("yritys"); // Oma tietotyyppi tähän
+  today: Date = new Date();
 
   varaus: any = { // Oma tietotyyppi tähän
     valittuDate: null,
