@@ -23,7 +23,7 @@
           <ion-input [(ngModel)]="password" type="password" placeholder="Salasana" minlength="8" maxlength="256" clearInput required></ion-input>
       </ion-item>
       <ion-button (click)="kirjaudu();" [disabled]="nappiDisabloitu" expand="full" color="light">Kirjaudu</ion-button>
-      <ion-button [disabled]="nappiDisabloitu" fill="outline" expand="full" color="light">Rekisteröidy</ion-button>
+      <ion-button (click)="terveydeksi.toast('Rekisteröityminen ei ole mahdollista demoversiossa.');" [disabled]="nappiDisabloitu" fill="outline" expand="full" color="light">Rekisteröidy</ion-button>
       <!--<ion-text>Ei tunnuksia? <a>Rekisteröidy täällä</a></ion-text>-->
     </ion-card-content>
   </ion-card>
