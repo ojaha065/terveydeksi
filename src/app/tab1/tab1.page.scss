@@ -1,3 +1,7 @@
 ion-content{
     --ion-background-color: linear-gradient(to bottom, rgb(218, 57, 57) 0%,rgb(218, 57, 84) 100%);
 }
+
+ion-item {
+    --background: transparent;
+}

@@ -65,5 +65,5 @@
 </ion-content>
 
 <ion-footer *ngIf="varaus.valittuDate && varaus.klo">
-  <ion-button (click)="varausSeuraavaNappi();" [disabled]="seuraavaNappiDisabloitu" expand="block" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
+  <ion-button (click)="varausSeuraavaNappi();" [disabled]="seuraavaNappiDisabloitu" expand="full" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
 </ion-footer>
