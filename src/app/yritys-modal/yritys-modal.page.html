@@ -17,30 +17,33 @@
     </ion-card-header>
     <ion-card-content>
       <div class="openStreetMap" #openStreetMap></div>
-      <ion-button color="light" *ngIf="terveydeksi.loginToken" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
+      <ion-text *ngIf="yritys.ajanvaraus">{{ terveydeksi.loginToken ? "Tälle yrittäjälle voit varata ajan sovelluksen kautta." : "Kirjaudu sisään varataksesi ajan tälle yrittäjälle." }}</ion-text>
+      <ion-text *ngIf="!yritys.ajanvaraus">Tämä yrittäjä ei vielä tue ajanvarausta sovelluksen kautta. Katso yrittäjän yhteystiedot alta.</ion-text>
+      <ion-button color="light" *ngIf="terveydeksi.loginToken && yritys.ajanvaraus" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
+      <ion-button color="light" *ngIf="terveydeksi.loginToken" (click)="terveydeksi.toast('Chat-palvelu ei käytössä. #demoefekti');" [disabled]="!yritys.chat">Aloita chat</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
       <ion-item color="dark">
-          <ion-icon name="pin" slot="start"></ion-icon>
-          <ion-label>{{ yritys.katuosoite }}</ion-label>
+        <ion-icon name="pin" slot="start"></ion-icon>
+        <ion-label>{{ yritys.katuosoite }}</ion-label>
       </ion-item>
       <ion-item color="dark">
-          <ion-icon name="archive" slot="start"></ion-icon>
-          <ion-label>{{ yritys.postinumero }} {{ yritys.postitoimipaikka }}</ion-label>
+        <ion-icon name="archive" slot="start"></ion-icon>
+        <ion-label>{{ yritys.postinumero }} {{ yritys.postitoimipaikka }}</ion-label>
       </ion-item>
       <ion-item *ngIf="yritys.puhelinnumero" color="dark">
-          <ion-icon name="call" slot="start"></ion-icon>
-          <ion-label>{{ yritys.puhelinnumero }}</ion-label>
-          <ion-button color="success">
-              <ion-icon name="call"></ion-icon>
-          </ion-button>
+        <ion-icon name="call" slot="start"></ion-icon>
+        <ion-label>{{ yritys.puhelinnumero }}</ion-label>
+        <ion-button color="success">
+          <ion-icon name="call"></ion-icon>
+        </ion-button>
       </ion-item>
       <ion-item *ngIf="yritys.email" color="dark">
-          <ion-icon name="mail" slot="start"></ion-icon>
-          <ion-label>{{ yritys.email }}</ion-label>
-          <ion-button color="secondary">
-              <ion-icon name="mail-open"></ion-icon>
-          </ion-button>
+        <ion-icon name="mail" slot="start"></ion-icon>
+        <ion-label>{{ yritys.email }}</ion-label>
+        <ion-button color="secondary">
+          <ion-icon name="mail-open"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-card-content>
   </ion-card>
