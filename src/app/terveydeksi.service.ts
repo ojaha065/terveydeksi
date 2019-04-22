@@ -1,8 +1,7 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
-import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +12,11 @@ export class TerveydeksiService {
   geolocationOptions: GeolocationOptions = {
     enableHighAccuracy: true,
     // Debug
-      timeout: 5000,
-      maximumAge: 0
+      //timeout: 5000,
+      //maximumAge: 0
     // Production
-      //timeout: 60000,
-      //maximumAge: 1200000
+      timeout: 60000,
+      maximumAge: 1200000
   };
 
   // TODO: yritykset-ominaisuudelle voisi määrittää oman tietotyypin.

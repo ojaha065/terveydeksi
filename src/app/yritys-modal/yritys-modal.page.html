@@ -18,7 +18,7 @@
     <ion-card-content>
       <div class="openStreetMap" #openStreetMap></div>
       <ion-text *ngIf="yritys.ajanvaraus">{{ terveydeksi.loginToken ? "Tälle yrittäjälle voit varata ajan sovelluksen kautta." : "Kirjaudu sisään varataksesi ajan tälle yrittäjälle." }}</ion-text>
-      <ion-text *ngIf="!yritys.ajanvaraus">Tämä yrittäjä ei vielä tue ajanvarausta sovelluksen kautta. Katso yrittäjän yhteystiedot alta.</ion-text>
+      <ion-text *ngIf="!yritys.ajanvaraus">Tämä yrittäjä ei vielä tue ajanvarausta Terveydeksi-sovelluksen kautta. Katso yrittäjän yhteystiedot alta.</ion-text>
       <ion-button color="light" *ngIf="terveydeksi.loginToken && yritys.ajanvaraus" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
       <ion-button color="light" *ngIf="terveydeksi.loginToken" (click)="terveydeksi.toast('Chat-palvelu ei käytössä. #demoefekti');" [disabled]="!yritys.chat">Aloita chat</ion-button>
       <hr />

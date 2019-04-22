@@ -66,14 +66,14 @@ export class Tab2Page {
       this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.terveydeksi.currentLat || 60.1733244,this.terveydeksi.currentLon || 24.941024800000037],13);
       this.lastGeolocationLat = this.terveydeksi.currentLat || 60.1733244;
       tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-        attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
+        attribution: "Karttatiedot &copy; OpenStreetMap, CC-BY-SA, Kuvitus &copy; Mapbox",
         maxZoom: 18
       }).addTo(this.openStreetMap);
       this.mapInterval = setInterval(this.updateMap,2500);
-      setTimeout(this.lataaYritystenMerkit,5000);
+      setTimeout(this.lataaYritystenMerkit,2000);
     }
     else{
-      // Kartta on jo olemassa, aloitetaan vain päivitys
+      // Kartta on jo olemassa, aloitetaan vain päivitys-looppi
       this.mapInterval = setInterval(this.updateMap,2500);
     }
   };

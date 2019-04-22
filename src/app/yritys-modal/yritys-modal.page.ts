@@ -19,7 +19,7 @@ export class YritysModalPage implements OnInit {
     this.modalController.dismiss();
   };
 
-  varaaAika = async (id: number): Promise<any> => {
+  varaaAika = async (): Promise<any> => {
     const modal = await this.modalController.create({
       component: AjanvarausModalPage,
       componentProps: {
@@ -35,7 +35,7 @@ export class YritysModalPage implements OnInit {
       // https://leafletjs.com/reference-1.4.0.html
       this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.yritys.lat,this.yritys.lon],16);
       tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-        attribution: "Map data &copy; <a href='https://www.openstreetmap.org/'>OpenStreetMap</a> contributors, <a href='https://creativecommons.org/licenses/by-sa/2.0/'>CC-BY-SA</a>, Imagery &copy; <a href='https://www.mapbox.com/'>Mapbox</a>",
+        attribution: "Karttatiedot &copy; OpenStreetMap, CC-BY-SA, Kuvitus &copy; Mapbox",
         maxZoom: 20
       }).addTo(this.openStreetMap);
 

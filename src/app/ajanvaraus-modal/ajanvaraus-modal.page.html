@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button><ion-icon name="arrow-back"></ion-icon></ion-button>
+    </ion-buttons>
     <ion-title *ngIf="page1">Varaa aika</ion-title>
     <ion-title *ngIf="!page1">Varauksen tiedot</ion-title>
   </ion-toolbar>
@@ -64,4 +67,3 @@
 <ion-footer *ngIf="varaus.valittuDate && varaus.klo">
   <ion-button (click)="varausSeuraavaNappi();" [disabled]="seuraavaNappiDisabloitu" expand="block" size="large" color="dark">{{ (page1) ? "Seuraava" : "Vahvista varaus" }}</ion-button>
 </ion-footer>
-
