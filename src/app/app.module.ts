@@ -17,12 +17,19 @@ import { AppComponent } from './app.component';
 
 import { YritysModalPageModule } from "./yritys-modal/yritys-modal.module";
 import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.module';
+import { PopoverComponent } from './popover/popover.component';
+
 
 registerLocaleData(localeFi);
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    PopoverComponent
+  ],
+  entryComponents: [
+    PopoverComponent
+  ],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, YritysModalPageModule, AjanvarausModalPageModule],
   providers: [
     StatusBar,

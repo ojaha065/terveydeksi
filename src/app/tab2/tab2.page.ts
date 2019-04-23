@@ -1,9 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { TerveydeksiService } from '../terveydeksi.service';
-import { ModalController, Platform, NavController } from '@ionic/angular';
+import { ModalController, Platform, NavController, PopoverController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 import { Map, tileLayer, marker } from "leaflet";
 import { Subscription } from 'rxjs';
+import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-tab2',
@@ -127,10 +128,20 @@ export class Tab2Page {
     this.lastGeolocationLat = -1;
   };
 
+  //Popover suodatin
+  avaaPopover = async (): Promise<any> => {
+    const popover = await this.popoverCtrl.create({
+      component: PopoverComponent,
+      translucent: false
+    });
+    return await popover.present();
+  };
+
   constructor(
     public terveydeksi: TerveydeksiService,
     private modalController: ModalController,
     private platform: Platform,
-    private navController: NavController
+    private navController: NavController,
+    private popoverCtrl: PopoverController
   ){};
 };
