@@ -3,6 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { AjanvarausModalPage } from '../ajanvaraus-modal/ajanvaraus-modal.page';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { Map, tileLayer, marker } from "leaflet";
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
   selector: 'app-yritys-modal',
@@ -51,11 +52,18 @@ export class YritysModalPage implements OnInit {
       karttamerkki.addTo(this.openStreetMap);
     };
 
+  // Puhelinsoitto
+  soitaNyt(number) {
+    this.callNumber.callNumber(number, true)
+      .then(res => console.log('Soitetaan!', res))
+      .catch(err => console.log('Error', err));
+  };
 
   constructor(
     private modalController: ModalController,
     public terveydeksi: TerveydeksiService,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private callNumber: CallNumber
   ){};
 
   ngOnInit(){};
