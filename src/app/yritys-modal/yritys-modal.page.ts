@@ -4,6 +4,7 @@ import { AjanvarausModalPage } from '../ajanvaraus-modal/ajanvaraus-modal.page';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { Map, tileLayer, marker, icon } from "leaflet";
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-yritys-modal',
@@ -26,31 +27,36 @@ export class YritysModalPage implements OnInit {
     modal.present();
   };
 
-    // Kun DOM on ladattu
-    ionViewDidEnter(){
-      // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
-      // https://leafletjs.com/reference-1.4.0.html
-      this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.yritys.lat,this.yritys.lon],16);
-      tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-        attribution: "Karttatiedot &copy; OpenStreetMap, CC-BY-SA, Kuvitus &copy; Mapbox",
-        maxZoom: 20
-      }).addTo(this.openStreetMap);
+  kirjauduNappi = (): void => {
+    this.router.navigateByUrl("/tabs/tab3");
+    this.modalController.dismiss();
+  };
 
-      // Markkeri
-      let karttamerkki = marker([this.yritys.lat,this.yritys.lon],{
-        icon: icon({
-          iconSize: [25,41],
-          iconAnchor: [13,41],
-          iconUrl: "assets/marker-icon.png",
-          shadowUrl: "assets/marker-icon.png",
-          iconRetinaUrl: "assets/marker-icon-2x.png"
-        }),
-        title: this.yritys.nimi,
-        alt: this.yritys.nimi
-      });
+  // Kun DOM on ladattu
+  ionViewDidEnter(){
+    // Olipas tämä OpenStreetMap muuten helppo GMapsiin verrattuna.
+    // https://leafletjs.com/reference-1.4.0.html
+    this.openStreetMap = new Map(this.mapContainer.nativeElement).setView([this.yritys.lat,this.yritys.lon],16);
+    tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      attribution: "Karttatiedot &copy; OpenStreetMap, CC-BY-SA, Kuvitus &copy; Mapbox",
+      maxZoom: 20
+    }).addTo(this.openStreetMap);
 
-      karttamerkki.addTo(this.openStreetMap);
-    };
+    // Markkeri
+    let karttamerkki = marker([this.yritys.lat,this.yritys.lon],{
+      icon: icon({
+        iconSize: [25,41],
+        iconAnchor: [13,41],
+        iconUrl: "assets/marker-icon.png",
+        shadowUrl: "assets/marker-icon.png",
+        iconRetinaUrl: "assets/marker-icon-2x.png"
+      }),
+      title: this.yritys.nimi,
+      alt: this.yritys.nimi
+    });
+
+    karttamerkki.addTo(this.openStreetMap);
+  };
 
   // Puhelinsoitto
   soitaNyt() {
@@ -61,6 +67,7 @@ export class YritysModalPage implements OnInit {
 
   constructor(
     public modalController: ModalController,
+    private router: Router,
     public terveydeksi: TerveydeksiService,
     private navParams: NavParams,
     private callNumber: CallNumber
