@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { AjanvarausModalPage } from '../ajanvaraus-modal/ajanvaraus-modal.page';
 import { TerveydeksiService } from '../terveydeksi.service';
-import { Map, tileLayer, marker } from "leaflet";
+import { Map, tileLayer, marker, icon } from "leaflet";
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 @Component({
@@ -38,12 +38,16 @@ export class YritysModalPage implements OnInit {
 
       // Markkeri
       let karttamerkki = marker([this.yritys.lat,this.yritys.lon],{
+        icon: icon({
+          iconSize: [25,41],
+          iconAnchor: [13,41],
+          iconUrl: "assets/marker-icon.png",
+          shadowUrl: "assets/marker-icon.png",
+          iconRetinaUrl: "assets/marker-icon-2x.png"
+        }),
         title: this.yritys.nimi,
         alt: this.yritys.nimi
       });
-
-      karttamerkki.options.icon.options.iconRetinaUrl = "assets/leaflet/marker-icon-2x.png";
-      karttamerkki.options.icon.options.shadowUrl = "assets/leaflet/marker-shadow.png";
 
       karttamerkki.addTo(this.openStreetMap);
     };

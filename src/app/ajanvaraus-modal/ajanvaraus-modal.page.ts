@@ -70,7 +70,7 @@ export class AjanvarausModalPage implements OnInit {
   };
 
   constructor(
-    private modalController: ModalController,
+    public modalController: ModalController,
     private terveydeksi: TerveydeksiService,
     private http: HttpClient,
     private navParams: NavParams,

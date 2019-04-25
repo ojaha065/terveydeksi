@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TerveydeksiService } from '../terveydeksi.service';
 import { ModalController, Platform, NavController, PopoverController } from '@ionic/angular';
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
-import { Map, tileLayer, marker } from "leaflet";
+import { Map, tileLayer, marker, icon } from "leaflet";
 import { Subscription } from 'rxjs';
 import { PopoverComponent } from '../popover/popover.component';
 
@@ -85,15 +85,16 @@ export class Tab2Page {
       this.terveydeksi[bugfix ? "piilotetutYritykset" : "yritykset"].forEach((yritys: any) => {
         let thisMarker = marker([yritys.lat,yritys.lon],{
           // Markerin asetukset
+          icon: icon({
+            iconSize: [25,41],
+            iconAnchor: [13,41],
+            iconUrl: "assets/marker-icon.png",
+            shadowUrl: "assets/marker-icon.png"
+          }),
           title: yritys.nimi,
           alt: yritys.nimi,
           riseOnHover: true
         });
-        // Korjataan puuttuvat ikonit
-        thisMarker.options.icon.options.iconRetinaUrl = "assets/leaflet/marker-icon-2x.png";
-        thisMarker.options.icon.options.shadowUrl = "assets/leaflet/marker-shadow.png";
-        //console.log(thisMarker);
-
         thisMarker.addTo(this.openStreetMap);
         thisMarker.on("click",() => {
           this.avaaYritysModal(yritys);
