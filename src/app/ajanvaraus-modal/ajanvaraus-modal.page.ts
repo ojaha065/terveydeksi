@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 import { TerveydeksiService } from '../terveydeksi.service';
-import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-ajanvaraus-modal',
@@ -70,10 +70,10 @@ export class AjanvarausModalPage implements OnInit {
   };
 
   constructor(
+    private modalController: ModalController,
     private terveydeksi: TerveydeksiService,
     private http: HttpClient,
     private navParams: NavParams,
-    private modalController: ModalController
   ){};
 
   ngOnInit(){};

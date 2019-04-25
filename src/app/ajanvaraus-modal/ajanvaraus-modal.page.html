@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-button><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <ion-button (click)="modalController.dismiss();"><ion-icon name="arrow-back"></ion-icon></ion-button>
     </ion-buttons>
     <ion-title *ngIf="page1">Varaa aika</ion-title>
     <ion-title *ngIf="!page1">Varauksen tiedot</ion-title>

@@ -16,10 +16,6 @@ export class YritysModalPage implements OnInit {
 
   openStreetMap: Map;
 
-  suljeModal = (): void => {
-    this.modalController.dismiss();
-  };
-
   varaaAika = async (): Promise<any> => {
     const modal = await this.modalController.create({
       component: AjanvarausModalPage,
@@ -53,14 +49,14 @@ export class YritysModalPage implements OnInit {
     };
 
   // Puhelinsoitto
-  soitaNyt(number) {
-    this.callNumber.callNumber(number, true)
-      .then(res => console.log('Soitetaan!', res))
-      .catch(err => console.log('Error', err));
+  soitaNyt() {
+    this.callNumber.callNumber(this.yritys.puhelinnumero, false).catch((error: string) => {
+      this.terveydeksi.toast(error);
+    });
   };
 
   constructor(
-    private modalController: ModalController,
+    public modalController: ModalController,
     public terveydeksi: TerveydeksiService,
     private navParams: NavParams,
     private callNumber: CallNumber

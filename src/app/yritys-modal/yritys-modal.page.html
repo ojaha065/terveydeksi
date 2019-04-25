@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="start">
-      <ion-button (click)="suljeModal();">
+      <ion-button (click)="modalController.dismiss();">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -34,14 +34,14 @@
       <ion-item *ngIf="yritys.puhelinnumero" color="dark">
         <ion-icon name="call" slot="start"></ion-icon>
         <ion-label>{{ yritys.puhelinnumero }}</ion-label>
-        <ion-button color="success" (click)="soitaNyt('yritys.puhelinnumero')">
+        <ion-button color="success" (click)="soitaNyt();">
           <ion-icon name="call"></ion-icon>
         </ion-button>
       </ion-item>
       <ion-item *ngIf="yritys.email" color="dark">
         <ion-icon name="mail" slot="start"></ion-icon>
         <ion-label>{{ yritys.email }}</ion-label>
-        <ion-button color="secondary" href="mailto:{{yritys.email}}">
+        <ion-button color="secondary" href="mailto:{{ yritys.email }}">
           <ion-icon name="mail-open"></ion-icon>
         </ion-button>
       </ion-item>

@@ -29,7 +29,7 @@ export class Tab3Page {
 
   nappiDisabloitu: boolean = false;
 
-  asiakas: null;
+  asiakas: object;
 
   kirjaudu = (): void => {
     this.nappiDisabloitu = true;
@@ -48,7 +48,13 @@ export class Tab3Page {
           this.username = null;
           this.password = null;
           this.terveydeksi.toast("Kirjautuminen onnistui!");
-          this.kirjautumisTiedot();
+
+          // Haetaan kirjautuneen asiakkaan tiedot
+          this.http.get(`${this.terveydeksi.apiUrl}/omatTiedot?token=${this.terveydeksi.loginToken}`).subscribe((response: object): void => {
+            this.asiakas = response[0];
+          },(error: HttpErrorResponse): void => {
+            this.terveydeksi.toast(`Virhekoodi ${error.status}. Tietojen haku epäonnistui!`);
+          });
         }
         else{
           // Väärä käyttäjätunnus ja/tai salasana
@@ -70,15 +76,6 @@ export class Tab3Page {
     this.terveydeksi.toast("Sinut kirjattiin ulos.");
     this.asiakas = null;
   };
-
-  kirjautumisTiedot = (): void => {
-    this.http.get(`${this.terveydeksi.apiUrl}/omatTiedot?token=${this.terveydeksi.loginToken}`).subscribe((response: object): void => {
-      this.asiakas = response[0];
-    },(error: HttpErrorResponse): void => {
-      this.terveydeksi.toast("Tietoja ei voida näyttää")
-    });
-  };
-
 
   constructor(
     public terveydeksi: TerveydeksiService,

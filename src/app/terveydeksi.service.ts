@@ -152,9 +152,9 @@ export class TerveydeksiService {
         this.lajitteleLista(true);
       },1000);
     }
-  }; //Lajittelulista loppuu
+  }; // LajitteleLista loppuu
 
-  //Toasta viestejä
+  // Toastaa viestejä
   toast = async(message: string): Promise<any> => {
     const toast = await this.toastCtrl.create({
       message: message,

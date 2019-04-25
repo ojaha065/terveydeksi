@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-buttons slot="end">
-      <ion-button (click)="suljePopover();">
+      <ion-button (click)="popoverCtrl.dismiss();">
         <ion-icon name="close"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -9,8 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <ion-button color="light" (click)="naytaChat();">Näytä Chat</ion-button>
- Suodatin chatin, aikavarauksen ja lääkärityypin mukaan
+  Suodatin chatin, aikavarauksen ja lääkärityypin mukaan
 </ion-content>

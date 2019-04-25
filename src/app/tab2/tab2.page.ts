@@ -134,7 +134,7 @@ export class Tab2Page {
       component: PopoverComponent,
       translucent: false
     });
-    return await popover.present();
+    popover.present();
   };
 
   constructor(
