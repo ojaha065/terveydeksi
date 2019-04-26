@@ -10,13 +10,14 @@ import { Platform, NavController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  // Palaa etusivulle
   subscription: Subscription;
   ionViewDidEnter(){
-    // Palaa etusivulle back-buttonilla
-    if (this.terveydeksi.loginToken && !this.asiakas) {
+    // Haetaan asiakkaan tiedot tarvittaessa
+    if(this.terveydeksi.loginToken && !this.asiakas){
       this.haeOmatTiedot();
     }
+
+    // Palaa etusivulle back-buttonilla
     this.subscription = this.platform.backButton.subscribe((): void => {
       this.navController.navigateRoot("/");
     });
@@ -48,12 +49,12 @@ export class Tab3Page {
           this.virheteksti = null;
           this.terveydeksi.loginToken = response.token;
           this.terveydeksi.username = this.username;
+          this.haeOmatTiedot();
           this.username = null;
           this.password = null;
           this.terveydeksi.tallennaKirjautuminen(false).then((): void => {
             this.terveydeksi.toast("Kirjautuminen onnistui!");
           });
-          this.haeOmatTiedot();
         }
         else{
           // Väärä käyttäjätunnus ja/tai salasana

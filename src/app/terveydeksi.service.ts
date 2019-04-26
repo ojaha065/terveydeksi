@@ -27,6 +27,7 @@ export class TerveydeksiService {
   yritykset: any[];
   piilotetutYritykset: any[] = [];
   httpVirhe: string;
+  db: SQLiteObject; // Tietokantayhteys
 
   loginToken: string;
   username: string;
@@ -38,9 +39,6 @@ export class TerveydeksiService {
   paikannusvirheDebug: string;
 
   hakulause: string;
-
-  //SQL
-  db: SQLiteObject;
 
   // Tietojen latausilmoitus
   lataus = async (): Promise<any> => {
@@ -169,40 +167,45 @@ export class TerveydeksiService {
   };
 
   //SQLite
-
-  avaaTietokanta = async (): Promise<any> => {
-    try {   
-      this.db = await this.sqlite.create({
-        name: "data.db",
-        location: "default"
-      });   
-      if (this.db) {
-        await this.db.executeSql("CREATE TABLE IF NOT EXISTS userinfo(token TEXT, username TEXT);", []);
-        let result = await this.db.executeSql("SELECT * FROM userinfo;", []);
-        if (result.rows.length > 0) {
-          this.loginToken = result.rows.item(0).token;
-          this.username = result.rows.item(0).username;
-          this.toast(`Tervetuloa takaisin, ${this.username}`)
+  tietokantayhteys = async (): Promise<any> => {
+    if(!this.db){
+      try{   
+        this.db = await this.sqlite.create({
+          name: "data.db",
+          location: "default"
+        });   
+        if(this.db){
+          //await this.db.executeSql("DROP TABLE IF EXISTS userinfo;",[]);
+          await this.db.executeSql("CREATE TABLE IF NOT EXISTS userinfo(token TEXT,username TEXT);",[]);
+          let result = await this.db.executeSql("SELECT * FROM userinfo;",[]);
+          if(result.rows.length > 0){
+            this.loginToken = result.rows.item(0).token;
+            this.username = result.rows.item(0).username;
+            this.toast(`Tervetuloa takaisin, ${this.username}`)
+          }
+        }
+        else{
+          console.info("Tämä käyttöympäristö ei tue SQLite-tietokantaa.");
+        }
       }
-      } else {
-        console.info("Tämä ympäristö ei tue SQLite-tietokantaa")
-      };
+      catch(error){
+        this.toast(error.message);
+      }
     }
-    catch(error){
-      this.toast(error.message);
-    } 
-  }
-
+  };
   tallennaKirjautuminen = async (uloskirjautuminen: boolean): Promise<any> => {
-    try {
-    if (uloskirjautuminen) {
-      await this.db.executeSql("DELETE FROM userinfo;", []);
-    } else {
-      await this.db.executeSql("INSERT INTO userinfo VALUES (?, ?);", [this.loginToken, this.username]);
-    }
-    }
-    catch(error){
-      this.toast(error.message);
+    if(this.db){
+      try {
+        if(uloskirjautuminen){
+          await this.db.executeSql("DELETE FROM userinfo;", []);
+        }
+        else{
+          await this.db.executeSql("INSERT INTO userinfo VALUES (?,?);",[this.loginToken,this.username]);
+        }
+      }
+      catch(error){
+        this.toast(error.message);
+      }
     }
   };
 
@@ -217,7 +220,9 @@ export class TerveydeksiService {
     this.platform.ready().then((): void => {
       this.lataus().then(() => {
         // Lataus valmis
-        this.avaaTietokanta();
+        if(this.platform.is("android") || this.platform.is("cordova")){
+          this.tietokantayhteys();
+        }
         this.haeYritykset(); // Haetaan yritykset
         this.paikanna(); // Haetaan paikannustieto
       });
