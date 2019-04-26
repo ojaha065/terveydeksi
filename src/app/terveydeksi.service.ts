@@ -184,9 +184,6 @@ export class TerveydeksiService {
             this.toast(`Tervetuloa takaisin, ${this.username}`)
           }
         }
-        else{
-          console.info("Tämä käyttöympäristö ei tue SQLite-tietokantaa.");
-        }
       }
       catch(error){
         this.toast(error.message);

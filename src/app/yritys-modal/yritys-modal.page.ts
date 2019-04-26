@@ -58,14 +58,14 @@ export class YritysModalPage implements OnInit {
     karttamerkki.addTo(this.openStreetMap);
   };
 
-  /* HUOM! Puhelinsoitto toimii muuten, mutta sitä ei kannata nyt käyttää
-  demoversiossa, jotta vältyttäisiin vahinkosoitoilta.
-  
   soitaNyt() {
-    this.callNumber.callNumber(this.yritys.puhelinnumero, false).catch((error: string) => {
-      this.terveydeksi.toast(error);
-    });
-  };*/
+    // HUOM! Puhelinsoitto toimii muuten, mutta sitä ei kannata nyt käyttää
+    // demoversiossa, jotta vältyttäisiin vahinkosoitoilta.
+    //this.callNumber.callNumber(this.yritys.puhelinnumero, false).catch((error: string) => {
+      //this.terveydeksi.toast(error);
+    //});
+    this.terveydeksi.toast("Tämä on vain demoversio, nämä eivät ole oikeita yrityksiä!");
+  };
 
   constructor(
     public modalController: ModalController,
