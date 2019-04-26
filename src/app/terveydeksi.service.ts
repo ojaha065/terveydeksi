@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Geolocation, Geoposition, PositionError, GeolocationOptions } from "@ionic-native/geolocation/ngx";
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
+import { SQLite, SQLiteObject} from "@ionic-native/sqlite/ngx";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,9 @@ export class TerveydeksiService {
   paikannusvirheDebug: string;
 
   hakulause: string;
+
+  //SQL
+  db: SQLiteObject;
 
   // Tietojen latausilmoitus
   lataus = async (): Promise<any> => {
@@ -164,16 +168,56 @@ export class TerveydeksiService {
     toast.present();
   };
 
+  //SQLite
+
+  avaaTietokanta = async (): Promise<any> => {
+    try {   
+      this.db = await this.sqlite.create({
+        name: "data.db",
+        location: "default"
+      });   
+      if (this.db) {
+        await this.db.executeSql("CREATE TABLE IF NOT EXISTS userinfo(token TEXT, username TEXT);", []);
+        let result = await this.db.executeSql("SELECT * FROM userinfo;", []);
+        if (result.rows.length > 0) {
+          this.loginToken = result.rows.item(0).token;
+          this.username = result.rows.item(0).username;
+          this.toast(`Tervetuloa takaisin, ${this.username}`)
+      }
+      } else {
+        console.info("Tämä ympäristö ei tue SQLite-tietokantaa")
+      };
+    }
+    catch(error){
+      this.toast(error.message);
+    } 
+  }
+
+  tallennaKirjautuminen = async (uloskirjautuminen: boolean): Promise<any> => {
+    try {
+    if (uloskirjautuminen) {
+      await this.db.executeSql("DELETE FROM userinfo;", []);
+    } else {
+      await this.db.executeSql("INSERT INTO userinfo VALUES (?, ?);", [this.loginToken, this.username]);
+    }
+    }
+    catch(error){
+      this.toast(error.message);
+    }
+  };
+
   constructor(
     private http: HttpClient,
     private geolocation: Geolocation,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
-    private platform: Platform
+    private platform: Platform,
+    private sqlite: SQLite
   ){
     this.platform.ready().then((): void => {
       this.lataus().then(() => {
         // Lataus valmis
+        this.avaaTietokanta();
         this.haeYritykset(); // Haetaan yritykset
         this.paikanna(); // Haetaan paikannustieto
       });

@@ -11,6 +11,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { SQLite } from '@ionic-native/sqlite/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { AppComponent } from './app.component';
 import { YritysModalPageModule } from "./yritys-modal/yritys-modal.module";
 import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.module';
 import { PopoverComponent } from './popover/popover.component';
+
 
 
 registerLocaleData(localeFi);
@@ -36,6 +38,7 @@ registerLocaleData(localeFi);
     SplashScreen,
     Geolocation,
     CallNumber,
+    SQLite,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

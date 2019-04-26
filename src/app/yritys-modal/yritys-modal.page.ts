@@ -58,12 +58,14 @@ export class YritysModalPage implements OnInit {
     karttamerkki.addTo(this.openStreetMap);
   };
 
-  // Puhelinsoitto
+  /* HUOM! Puhelinsoitto toimii muuten, mutta sitä ei kannata nyt käyttää
+  demoversiossa, jotta vältyttäisiin vahinkosoitoilta.
+  
   soitaNyt() {
     this.callNumber.callNumber(this.yritys.puhelinnumero, false).catch((error: string) => {
       this.terveydeksi.toast(error);
     });
-  };
+  };*/
 
   constructor(
     public modalController: ModalController,

@@ -14,6 +14,9 @@ export class Tab3Page {
   subscription: Subscription;
   ionViewDidEnter(){
     // Palaa etusivulle back-buttonilla
+    if (this.terveydeksi.loginToken && !this.asiakas) {
+      this.haeOmatTiedot();
+    }
     this.subscription = this.platform.backButton.subscribe((): void => {
       this.navController.navigateRoot("/");
     });
@@ -47,14 +50,10 @@ export class Tab3Page {
           this.terveydeksi.username = this.username;
           this.username = null;
           this.password = null;
-          this.terveydeksi.toast("Kirjautuminen onnistui!");
-
-          // Haetaan kirjautuneen asiakkaan tiedot
-          this.http.get(`${this.terveydeksi.apiUrl}/omatTiedot?token=${this.terveydeksi.loginToken}`).subscribe((response: object): void => {
-            this.asiakas = response[0];
-          },(error: HttpErrorResponse): void => {
-            this.terveydeksi.toast(`Virhekoodi ${error.status}. Tietojen haku epäonnistui!`);
+          this.terveydeksi.tallennaKirjautuminen(false).then((): void => {
+            this.terveydeksi.toast("Kirjautuminen onnistui!");
           });
+          this.haeOmatTiedot();
         }
         else{
           // Väärä käyttäjätunnus ja/tai salasana
@@ -73,8 +72,20 @@ export class Tab3Page {
   kirjauduUlos = (): void => {
     this.terveydeksi.loginToken = null;
     this.terveydeksi.username = null;
-    this.terveydeksi.toast("Sinut kirjattiin ulos.");
     this.asiakas = null;
+    this.terveydeksi.tallennaKirjautuminen(true).then((): void => {
+      this.terveydeksi.toast("Sinut kirjattiin ulos.");
+    });
+    
+  };
+
+  haeOmatTiedot = (): void => {
+    // Haetaan kirjautuneen asiakkaan tiedot
+    this.http.get(`${this.terveydeksi.apiUrl}/omatTiedot?token=${this.terveydeksi.loginToken}`).subscribe((response: object): void => {
+      this.asiakas = response[0];
+    },(error: HttpErrorResponse): void => {
+      this.terveydeksi.toast(`Virhekoodi ${error.status}. Tietojen haku epäonnistui!`);
+    });
   };
 
   constructor(
