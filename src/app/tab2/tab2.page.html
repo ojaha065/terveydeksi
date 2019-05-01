@@ -1,11 +1,19 @@
 <ion-header>
-  <ion-toolbar color="dark">
+  <ion-toolbar *ngIf="!ylapalkki" color="dark">
     <ion-title>
       {{ terveydeksi.hakulause ? "Hae palveluja" : "Palvelut lähelläsi" }}
     </ion-title>
     <ion-buttons slot="end">
+      <ion-button (click)="avaaHaku();"><ion-icon name="search"></ion-icon></ion-button>
       <ion-button (click)="avaaPopover();"><ion-icon name="build"></ion-icon></ion-button>
       <ion-button (click)="locateButton();"><ion-icon name="locate"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="ylapalkki" color="dark">
+    <ion-buttons>
+      <ion-button slot="start" (click)="suljeHaku()"><ion-icon name="arrow-back"></ion-icon></ion-button>
+      <ion-searchbar (keyup.enter)="hae();" [(ngModel)]="hakulause" color="light" placeholder="Kaupunki..." autocomplete="on" autocorrect="on" animated></ion-searchbar>
+      <ion-button slot="end" fill="outline" (click)="hae();" size="default">Hae</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -15,6 +15,7 @@ export class Tab2Page {
   subscription: Subscription;
   mapInterval: any;
   yritysModalAuki: boolean = false;
+  ylapalkki: boolean = false;
   ionViewWillLeave(){
     this.subscription.unsubscribe();
     if(this.mapInterval){
@@ -29,6 +30,8 @@ export class Tab2Page {
   lastGeolocationLat: number;
   hakulauseMuisti: string;
   locateButtonPainettu: boolean = false;
+
+  hakulause: string;
 
   avaaYritysModal = async (yritys: object): Promise<any> => {
     const modal = await this.modalController.create({
@@ -128,6 +131,20 @@ export class Tab2Page {
     this.terveydeksi.paikanna();
     this.lastGeolocationLat = -1;
   };
+
+  hae = (): void => {
+    this.terveydeksi.hakulause = this.hakulause;
+    this.terveydeksi.lajitteleLista();
+    this.ylapalkki = false;
+  };
+
+  avaaHaku = (): void => {
+    this.ylapalkki = true;
+  }
+
+  suljeHaku = (): void => {
+    this.ylapalkki = false;
+  }
 
   //Popover suodatin
   avaaPopover = async (): Promise<any> => {

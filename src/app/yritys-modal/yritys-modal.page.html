@@ -20,8 +20,9 @@
       <ion-text *ngIf="yritys.ajanvaraus && terveydeksi.loginToken">Tälle yrittäjälle voit varata ajan sovelluksen kautta.</ion-text>
       <ion-text *ngIf="yritys.ajanvaraus && !terveydeksi.loginToken"><a (click)="kirjauduNappi();">Kirjaudu sisään</a> varataksesi ajan tälle yrittäjälle.</ion-text>
       <ion-text *ngIf="!yritys.ajanvaraus">Tämä yrittäjä ei vielä tue ajanvarausta Terveydeksi-sovelluksen kautta. Katso yrittäjän yhteystiedot alta.</ion-text>
-      <ion-button color="light" *ngIf="terveydeksi.loginToken && yritys.ajanvaraus" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
-      <ion-button color="light" *ngIf="terveydeksi.loginToken" (click)="terveydeksi.toast('Chat-palvelu ei käytössä. #demoefekti');" [disabled]="!yritys.chat">Aloita chat</ion-button>
+      <hr />
+      <ion-button fill="outline" color="light" *ngIf="terveydeksi.loginToken && yritys.ajanvaraus" (click)="varaaAika(yritys.id);">Varaa aika</ion-button>
+      <ion-button fill="outline" color="light" *ngIf="terveydeksi.loginToken" (click)="terveydeksi.toast('Chat-palvelu ei käytössä. #demoefekti');" [disabled]="!yritys.chat">Aloita chat</ion-button>
       <hr />
       <ion-text *ngIf="yritys.kuvaus">{{ yritys.kuvaus }}</ion-text>
       <ion-item color="dark">
