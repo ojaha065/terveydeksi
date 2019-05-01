@@ -47,6 +47,10 @@
           <ion-icon name="mail-open"></ion-icon>
         </ion-button>
       </ion-item>
+      <ion-item *ngIf="yritys.kotisivut" color="dark">
+        <ion-icon name="link" slot="start"></ion-icon>
+        <ion-label>{{ yritys.kotisivut }}</ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

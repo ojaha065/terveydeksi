@@ -5,7 +5,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="avaaHaku();"><ion-icon name="search"></ion-icon></ion-button>
-      <ion-button (click)="avaaPopover();"><ion-icon name="build"></ion-icon></ion-button>
+      <ion-button (click)="avaaPopover();"><ion-icon name="funnel"></ion-icon></ion-button>
       <ion-button (click)="locateButton();"><ion-icon name="locate"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -22,15 +22,18 @@
   <div class="openStreetMap" #openStreetMap></div>
   <ion-list>
     <ion-text color="danger" *ngIf="terveydeksi.paikannusvirhe && !terveydeksi.httpVirhe">{{ terveydeksi.paikannusvirhe }}</ion-text>
-    <div *ngIf="terveydeksi.httpVirhe">
-      <ion-text color="danger">{{ terveydeksi.httpVirhe }}</ion-text>
-      <ion-button (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
-      <ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>
-    </div>
+    <ion-card color="dark" *ngIf="terveydeksi.httpVirhe">
+      <ion-icon class="varoitus" name="warning"></ion-icon>
+      <hr />
+      <ion-text>{{ terveydeksi.httpVirhe }}</ion-text>
+      <hr />
+      <ion-button color="light" (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
+      <!--<ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>-->
+    </ion-card>
     <div *ngIf="terveydeksi.hakulause">
       <h3 *ngIf="terveydeksi.yritykset.length > 0">Palvelut paikkakunnalla {{ terveydeksi.hakulause | titlecase }} ({{ terveydeksi.yritykset.length }} kpl)</h3>
       <h3 *ngIf="terveydeksi.yritykset.length === 0">Ei hakuloksia hakusanalla {{ terveydeksi.hakulause }}</h3>
-      <ion-button (click)="showAll();">Näytä kaikki</ion-button>
+      <ion-button color="light" (click)="showAll();">Näytä kaikki</ion-button>
     </div>
     <ion-item color="dark" *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
       <ion-label text-wrap>
