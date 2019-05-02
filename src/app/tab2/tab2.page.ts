@@ -31,6 +31,7 @@ export class Tab2Page {
   hakulauseMuisti: string;
   locateButtonPainettu: boolean = false;
 
+  // Tätä käytetään vain yläpalkin kentässä, ns. "virallinen" hakulause on servicessä.
   hakulause: string;
 
   avaaYritysModal = async (yritys: object): Promise<any> => {
@@ -80,7 +81,10 @@ export class Tab2Page {
       // Kartta on jo olemassa, aloitetaan vain päivitys-looppi
       this.mapInterval = setInterval(this.updateMap,2500);
     }
-  };
+
+    this.ylapalkki = false;
+    this.hakulause = this.terveydeksi.hakulause;
+  }; // ionViewDidEnter loppuu
 
   lataaYritystenMerkit = (bugfix?: boolean): void => {
     if(this.terveydeksi.yritykset){
@@ -132,20 +136,15 @@ export class Tab2Page {
     this.lastGeolocationLat = -1;
   };
 
+  toggleHaku = (): void => {
+    this.ylapalkki = !this.ylapalkki;
+  };
   hae = (): void => {
     this.terveydeksi.hakulause = this.hakulause;
     this.terveydeksi.lajitteleLista();
     this.ylapalkki = false;
   };
-
-  avaaHaku = (): void => {
-    this.ylapalkki = true;
-  }
-
-  suljeHaku = (): void => {
-    this.ylapalkki = false;
-  }
-
+  
   //Popover suodatin
   avaaPopover = async (): Promise<any> => {
     const popover = await this.popoverCtrl.create({

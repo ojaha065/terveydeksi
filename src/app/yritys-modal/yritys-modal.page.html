@@ -49,7 +49,7 @@
       </ion-item>
       <ion-item *ngIf="yritys.kotisivut" color="dark">
         <ion-icon name="link" slot="start"></ion-icon>
-        <ion-label>{{ yritys.kotisivut }}</ion-label>
+        <ion-label><a [href]="yritys.kotisivut" target="_blank">{{ yritys.kotisivut }}</a></ion-label>
       </ion-item>
     </ion-card-content>
   </ion-card>
