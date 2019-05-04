@@ -5,7 +5,6 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="toggleHaku();"><ion-icon name="search"></ion-icon></ion-button>
-      <ion-button (click)="avaaPopover();"><ion-icon name="funnel"></ion-icon></ion-button>
       <ion-button (click)="locateButton();"><ion-icon name="locate"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -33,11 +32,14 @@
       <!--<ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>-->
     </ion-card>
     <div *ngIf="terveydeksi.hakulause">
-      <h3 *ngIf="terveydeksi.yritykset.length > 0">Palvelut paikkakunnalla {{ terveydeksi.hakulause | titlecase }} ({{ terveydeksi.yritykset.length }} kpl)</h3>
-      <h3 *ngIf="terveydeksi.yritykset.length === 0">Ei hakuloksia hakusanalla {{ terveydeksi.hakulause }}</h3>
+      <h4 *ngIf="terveydeksi.yritykset.length > 0">Palvelut paikkakunnalla {{ terveydeksi.hakulause | titlecase }} ({{ terveydeksi.yritykset.length }} kpl)</h4>
+      <h4 *ngIf="terveydeksi.yritykset.length === 0">Ei hakuloksia hakusanalla {{ terveydeksi.hakulause }}</h4>
       <ion-button color="light" (click)="showAll();">Näytä kaikki</ion-button>
     </div>
     <ion-item color="dark" *ngFor="let yritys of terveydeksi.yritykset" (click)="avaaYritysModal(yritys);">
+      <ion-avatar item-start>
+        <img src="assets/avatarkuva.png">
+      </ion-avatar>
       <ion-label text-wrap>
         <ion-text>
           <h1>{{ yritys.nimi }}</h1>

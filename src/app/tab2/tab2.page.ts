@@ -4,7 +4,6 @@ import { ModalController, Platform, NavController, PopoverController } from '@io
 import { YritysModalPage } from '../yritys-modal/yritys-modal.page';
 import { Map, tileLayer, marker, icon } from "leaflet";
 import { Subscription } from 'rxjs';
-import { PopoverComponent } from '../popover/popover.component';
 
 @Component({
   selector: 'app-tab2',
@@ -145,14 +144,6 @@ export class Tab2Page {
     this.ylapalkki = false;
   };
   
-  //Popover suodatin
-  avaaPopover = async (): Promise<any> => {
-    const popover = await this.popoverCtrl.create({
-      component: PopoverComponent,
-      translucent: false
-    });
-    popover.present();
-  };
 
   constructor(
     public terveydeksi: TerveydeksiService,
