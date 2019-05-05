@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [YritysModalPage]
 })
-export class YritysModalPageModule {}
+export class YritysModalPageModule {};

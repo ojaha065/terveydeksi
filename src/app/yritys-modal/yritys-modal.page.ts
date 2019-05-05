@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-yritys-modal',
-  templateUrl: './yritys-modal.page.html',
-  styleUrls: ['./yritys-modal.page.scss']
+  templateUrl: './yritys-modal.page.html'
 })
 export class YritysModalPage implements OnInit {
   @ViewChild("openStreetMap") mapContainer: any;

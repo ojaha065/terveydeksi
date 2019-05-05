@@ -20,10 +20,6 @@ export class TerveydeksiService {
       maximumAge: 1200000
   };
 
-  // TODO: yritykset-ominaisuudelle voisi määrittää oman tietotyypin.
-  // Eli sen tietotyyppi olisikin yritys[] eikä any[].
-  // Uusi tietotyyppi pitää luoda sen perusteella mitä REST-api palauttaa.
-  // Kirjointin määrittelyn REST-apin repoon. T: Jani
   yritykset: any[];
   piilotetutYritykset: any[] = [];
   httpVirhe: string;
@@ -77,7 +73,7 @@ export class TerveydeksiService {
       this.currentLat = result.coords.latitude;
       this.currentLon = result.coords.longitude;
 
-      // Varmistetaan, että joka paikannuskerralla sijainti on hieman eri, jotta kartta siirtyy
+      // Varmistetaan, että joka paikannuskerralla sijainti on hieman eri, jotta kartta toimii oikein
       // Huono ratkaisu, mutta toimii.
       this.currentLat += Math.random() * 0.0001;
 
@@ -179,8 +175,9 @@ export class TerveydeksiService {
           await this.db.executeSql("CREATE TABLE IF NOT EXISTS userinfo(token TEXT,username TEXT);",[]);
           let result = await this.db.executeSql("SELECT * FROM userinfo;",[]);
           if(result.rows.length > 0){
-            this.loginToken = result.rows.item(0).token;
-            this.username = result.rows.item(0).username;
+            let rivi: any = result.rows.item(0);
+            this.loginToken = rivi.token;
+            this.username = rivi.username;
             this.toast(`Tervetuloa takaisin, ${this.username}`)
           }
         }
@@ -194,7 +191,7 @@ export class TerveydeksiService {
     if(this.db){
       try {
         if(uloskirjautuminen){
-          await this.db.executeSql("DELETE FROM userinfo;", []);
+          await this.db.executeSql("DELETE FROM userinfo;", []); // Tyhjentää koko taulun
         }
         else{
           await this.db.executeSql("INSERT INTO userinfo VALUES (?,?);",[this.loginToken,this.username]);
@@ -217,7 +214,7 @@ export class TerveydeksiService {
     this.platform.ready().then((): void => {
       this.lataus().then(() => {
         // Lataus valmis
-        if(this.platform.is("android") || this.platform.is("cordova")){
+        if(this.platform.is("android") || this.platform.is("cordova")){ // Ei turhaan yritetä avata tietokantayhteyttä selainympäristössä
           this.tietokantayhteys();
         }
         this.haeYritykset(); // Haetaan yritykset

@@ -19,8 +19,6 @@ import { AppComponent } from './app.component';
 import { YritysModalPageModule } from "./yritys-modal/yritys-modal.module";
 import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.module';
 
-
-
 registerLocaleData(localeFi);
 
 @NgModule({

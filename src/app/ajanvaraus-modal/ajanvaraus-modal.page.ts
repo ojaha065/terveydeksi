@@ -9,10 +9,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./ajanvaraus-modal.page.scss']
 })
 export class AjanvarausModalPage implements OnInit {
-  yritys: any = this.navParams.get("yritys"); // Oma tietotyyppi tähän
+  yritys: any = this.navParams.get("yritys");
   today: Date = new Date();
 
-  varaus: any = { // Oma tietotyyppi tähän
+  varaus: any = {
     valittuDate: null,
     valittuDatePinta: null,
     klo: null,

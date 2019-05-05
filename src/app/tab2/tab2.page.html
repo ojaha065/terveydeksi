@@ -27,9 +27,6 @@
       <ion-text>{{ terveydeksi.httpVirhe }}</ion-text>
       <hr />
       <ion-button color="light" (click)="terveydeksi.haeYritykset();" size="large" expand="block">Yritä uudelleen</ion-button>
-      <!-- Mitä?!? Kissakuva poistettu? :((( -->
-      <!-- :D -->
-      <!--<ion-img src="assets/cat.jpg" alt="Have a cat!"></ion-img>-->
     </ion-card>
     <div *ngIf="terveydeksi.hakulause">
       <h4 *ngIf="terveydeksi.yritykset.length > 0">Palvelut paikkakunnalla {{ terveydeksi.hakulause | titlecase }} ({{ terveydeksi.yritykset.length }} kpl)</h4>

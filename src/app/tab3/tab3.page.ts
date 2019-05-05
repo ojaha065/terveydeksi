@@ -10,7 +10,8 @@ import { Platform, NavController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  subscription: Subscription;
+  subscription: Subscription; // Tähän tallennetaan laitteen back-buttoniin liitetty "tilaus", jotta se voidaan perua sivulta poistuttaessa
+
   ionViewDidEnter(){
     // Haetaan asiakkaan tiedot tarvittaessa
     if(this.terveydeksi.loginToken && !this.asiakas){
@@ -22,6 +23,7 @@ export class Tab3Page {
       this.navController.navigateRoot("/");
     });
   };
+  
   ionViewWillLeave(){
     this.subscription.unsubscribe();
   };
@@ -42,7 +44,7 @@ export class Tab3Page {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
-      }).subscribe((response: any): void => { // response tarvitsee oman tietotyypin
+      }).subscribe((response: any): void => {
         // OK
         //console.log(response);
         if(response.statusCode === 0){

@@ -11,10 +11,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  subscription: Subscription;
+  subscription: Subscription; // Tähän tallennetaan laitteen back-buttoniin liitetty "tilaus", jotta se voidaan perua sivulta poistuttaessa
+
   mapInterval: any;
+
   yritysModalAuki: boolean = false;
   ylapalkki: boolean = false;
+
   ionViewWillLeave(){
     this.subscription.unsubscribe();
     if(this.mapInterval){
@@ -22,7 +25,7 @@ export class Tab2Page {
     }
   };
 
-  // Haetaan elementti sivulta
+  // Haetaan kartalle varattu elementti sivulta
   @ViewChild("openStreetMap") mapContainer: any;
 
   openStreetMap: Map;
@@ -41,9 +44,11 @@ export class Tab2Page {
       }
     });
     this.yritysModalAuki = true;
+
     modal.onDidDismiss().then((): void => {
       this.yritysModalAuki = false;
     });
+
     modal.present();
   };
 
@@ -149,7 +154,6 @@ export class Tab2Page {
     public terveydeksi: TerveydeksiService,
     private modalController: ModalController,
     private platform: Platform,
-    private navController: NavController,
-    private popoverCtrl: PopoverController
+    private navController: NavController
   ){};
 };
