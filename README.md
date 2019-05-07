@@ -6,6 +6,6 @@ Tietojen hakuun MySQL-tietokannasta käytetään todella yksinkertaista NodeJS R
 
 ## Käännetyt versiot
 * Android-apk löytyy builds-kansiosta (juuressa)
-* [Selainversio](https://terveydeksi.herokuapp.com) (Ei PWA)
+* [Selainversio](https://terveydeksi.herokuapp.com)
 
 Tämä tiedosto päivitetty viimeksi 7.5.2019
