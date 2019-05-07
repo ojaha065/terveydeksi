@@ -1,0 +1,19 @@
+{
+  "name": "Terveydeksi - Ammattilaiset lähelläsi",
+  "short_name": "Terveydeksi",
+  "description": "Löydä terveydenhuollon ammattilaiset läheltäsi",
+  "dir": "ltr",
+  "lang": "fi",
+  "theme_color": "#ff042b",
+  "background_color": "#ff042b",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "assets/icons/icon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ]
+}

@@ -132,6 +132,7 @@ export class TerveydeksiService {
 
         // Matka pallon pinnalla
         // Kyllä lukion matematiikan opettaja olisi nyt ylpeä... :D
+        // Ja minä olin väärässä siinä, että ei näitä ikinä oikeasti tarvitse missään...
         let a: number = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2) * Math.cos(currentLatRadians) * Math.cos(yritysLatRadians);
         let c: number = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1 - a));
 

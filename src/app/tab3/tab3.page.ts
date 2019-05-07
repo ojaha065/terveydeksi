@@ -10,7 +10,7 @@ import { Platform, NavController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-  subscription: Subscription; // Tähän tallennetaan laitteen back-buttoniin liitetty "tilaus", jotta se voidaan perua sivulta poistuttaessa
+  subscription: Subscription; // Tähän tallennetaan laitteen back-buttoniin liitetty "tilaus", jotta se voidaan perua sivulta poistuttaessa.
 
   ionViewDidEnter(){
     // Haetaan asiakkaan tiedot tarvittaessa

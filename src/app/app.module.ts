@@ -18,6 +18,8 @@ import { AppComponent } from './app.component';
 
 import { YritysModalPageModule } from "./yritys-modal/yritys-modal.module";
 import { AjanvarausModalPageModule } from './ajanvaraus-modal/ajanvaraus-modal.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localeFi);
 
@@ -27,7 +29,7 @@ registerLocaleData(localeFi);
   ],
   entryComponents: [
   ],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, YritysModalPageModule, AjanvarausModalPageModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, YritysModalPageModule, AjanvarausModalPageModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
     SplashScreen,

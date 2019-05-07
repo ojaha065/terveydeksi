@@ -5,9 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ionic serve --devapp",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -17,7 +15,9 @@
     "@angular/http": "^7.2.12",
     "@angular/platform-browser": "^7.2.12",
     "@angular/platform-browser-dynamic": "^7.2.12",
+    "@angular/pwa": "^0.12.4",
     "@angular/router": "^7.2.12",
+    "@angular/service-worker": "^7.2.12",
     "@ionic-native/call-number": "^5.5.0",
     "@ionic-native/core": "^5.4.0",
     "@ionic-native/email-composer": "^5.5.0",
@@ -50,17 +50,17 @@
     "@angular-devkit/core": "~7.2.3",
     "@angular-devkit/schematics": "~7.2.3",
     "@angular/cli": "^7.3.8",
-    "@angular/compiler": "^7.2.12",
-    "@angular/compiler-cli": "^7.2.12",
-    "@angular/language-service": "^7.2.12",
+    "@angular/compiler": "^7.2.14",
+    "@angular/compiler-cli": "^7.2.14",
+    "@angular/language-service": "^7.2.14",
     "@ionic/angular-toolkit": "~1.4.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^10.14.4",
+    "@types/node": "^10.14.6",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^4.0.1",
+    "karma": "^4.1.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
@@ -84,10 +84,7 @@
       },
       "cordova-plugin-ionic-keyboard": {},
       "call-number": {},
-      "cordova-sqlite-storage": {},
-      "cordova-plugin-email-composer": {
-        "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      }
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"
